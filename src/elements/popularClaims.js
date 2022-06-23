@@ -1,19 +1,26 @@
-import React from "react";
-import {ResultPresent} from "./resultPresent";
+import React from 'react';
+import {ResultPresent} from './resultPresent.js';
 
-class PopularClaims extends React.Component {
-    //for the constructor, need field: results (as an array of checked result)
-    
-    render() {
-        const listItems = this.props.results.map(
-            (result) => 
-            <li>
-                <ResultPresent format="short" content={result}/> 
-            </li>
-        );
+/**
+ * 
+ * @returns A list of checked result represented in a short way
+ */
+export const PopularClaims = () => {
+    // access the database to get the results to prsent
+    // TODO: access database
+    const results = [
+      {field: 'Human will die.', score: 'True'},
+    ];
 
-        return (
-            <ul>{listItems}</ul>
-        );
-    }
-}
+    const listItems = results.map(
+        (result) =>
+          <li>
+            <ResultPresent format="short" result={result}/>
+          </li>,
+    );
+
+    return (
+      <ul>{listItems}</ul>
+    );
+};
+
