@@ -59,36 +59,36 @@ class App extends React.Component {
           onLogInChange={this.handleLogInChange}
           logInStats={this.state.logInStats}
         />);
-        // case "signIn":
-        // 	return (<pageSignIn
-        // 	onPageChange={this.handlePageChange}
-        // 	onLogInChange={this.handleLogInChange}
-        // 	logInStats={this.state.logInStats}/>);
-        // case "signUp":
-        // 	return (<pageSignUp
-        // 	onPageChange={this.handlePageChange}
-        // 	onLogInChange={this.handleLogInChange}
-        // 	logInStats={this.state.logInStats}/>);
-        // case "checked":
-        // 	return (<pageChecked
-        // 	onPageChange={this.handlePageChange}
-        // 	onLogInChange={this.handleLogInChange}
-        // 	logInStats={this.state.logInStats}/>);
-        // case "newClaim":
-        // 	return (<pageNewClaim
-        // 	onPageChange={this.handlePageChange}
-        // 	onLogInChange={this.handleLogInChange}
-        // 	logInStats={this.state.logInStats}/>);
-        // case "result":
-        // 	return (<pageResult
-        // 	onPageChange={this.handlePageChange}
-        // 	onLogInChange={this.handleLogInChange}
-        // 	logInStats={this.state.logInStats}/>);
-        // case "aboutUs":
-        // 	return (<pageAboutUs
-        // 	onPageChange={this.handlePageChange}
-        // 	onLogInChange={this.handleLogInChange}
-        // 	logInStats={this.state.logInStats}/>);
+        case "signIn":
+        	return (<pageSignIn
+        	onPageChange={this.handlePageChange}
+        	onLogInChange={this.handleLogInChange}
+        	logInStats={this.state.logInStats}/>);
+        case "signUp":
+        	return (<pageSignUp
+        	onPageChange={this.handlePageChange}
+        	onLogInChange={this.handleLogInChange}
+        	logInStats={this.state.logInStats}/>);
+        case "checked":
+        	return (<pageChecked
+        	onPageChange={this.handlePageChange}
+        	onLogInChange={this.handleLogInChange}
+        	logInStats={this.state.logInStats}/>);
+        case "newClaim":
+        	return (<pageNewClaim
+        	onPageChange={this.handlePageChange}
+        	onLogInChange={this.handleLogInChange}
+        	logInStats={this.state.logInStats}/>);
+        case "result":
+        	return (<pageResult
+        	onPageChange={this.handlePageChange}
+        	onLogInChange={this.handleLogInChange}
+        	logInStats={this.state.logInStats}/>);
+        case "aboutUs":
+        	return (<pageAboutUs
+        	onPageChange={this.handlePageChange}
+        	onLogInChange={this.handleLogInChange}
+        	logInStats={this.state.logInStats}/>);
       default:
         throw new Error('No such page.');
     }
