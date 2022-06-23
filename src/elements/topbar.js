@@ -3,7 +3,7 @@ import logo from '../logo.svg';
 
 /**
  * 
- * @param {logInStats structure, including: log, userName} props 
+ * @param {a structure including logInStats, and other handler functions} props 
  * @returns html file of the top bar frequently used in different pages
  */
 export const TopBar = (props) => {
@@ -12,22 +12,22 @@ export const TopBar = (props) => {
       return (
         <header>
           <img src={logo} className="app-logo" alt='logo' />
-          <button >Checked</button>
-          <button >New Claim</button>
-          <button >About Us</button>
-          <button className="signInButton">Sign In</button>
-          <button >Sign Up</button>
+          <button onClick={() => props.onPageChange("checked")}>Checked</button>
+          <button onClick={() => props.onPageChange("newClaim")}>New Claim</button>
+          <button onClick={() => props.onPageChange("aboutUs")}>About Us</button>
+          <button className="signInButton" onClick={() => props.onPageChange("signIn")}>Sign In</button>
+          <button onClick={() => props.onPageChange("signUp")}>Sign Up</button>
         </header>
       );
     } else {
       return (
         <header>
           <img src={logo} className='app-logo' alt='logo' />
-          <button >Checked</button>
-          <button >New Claim</button>
-          <button >About Us</button>
+          <button onClick={() => props.onPageChange("checked")}>Checked</button>
+          <button onClick={() => props.onPageChange("newClaim")}>New Claim</button>
+          <button onClick={() => props.onPageChange("aboutUs")}>About Us</button>
           <p className="userName">{props.logInStats.userName}</p>
-          <button >Sign Out</button>
+          <button onClick={() => props.onLogInChange({log:false, userName: undefined})}>Sign Out</button>
         </header>
       );
     }

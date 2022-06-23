@@ -1,28 +1,12 @@
 import './App.css';
 import React from 'react';
-import {PageMain} from './pages/pageMain';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
+import { PageMain } from './pages/pageMain';
+import { PageNewClaim } from "./pages/pageNewClaim";
+import { PageChecked } from "./pages/pageChecked";
+import { PageSignIn } from "./pages/pageSignIn";
+import { PageSignUp } from "./pages/pageSignUp";
+import { PageResult } from "./pages/pageResult";
+import { PageAboutUs} from "./pages/pageAboutUs";
 
 class App extends React.Component {
   constructor(props) {
@@ -60,32 +44,32 @@ class App extends React.Component {
           logInStats={this.state.logInStats}
         />);
         case "signIn":
-        	return (<pageSignIn
+        	return (<PageSignIn
         	onPageChange={this.handlePageChange}
         	onLogInChange={this.handleLogInChange}
         	logInStats={this.state.logInStats}/>);
         case "signUp":
-        	return (<pageSignUp
+        	return (<PageSignUp
         	onPageChange={this.handlePageChange}
         	onLogInChange={this.handleLogInChange}
         	logInStats={this.state.logInStats}/>);
         case "checked":
-        	return (<pageChecked
+        	return (<PageChecked
         	onPageChange={this.handlePageChange}
         	onLogInChange={this.handleLogInChange}
         	logInStats={this.state.logInStats}/>);
         case "newClaim":
-        	return (<pageNewClaim
+        	return (<PageNewClaim
         	onPageChange={this.handlePageChange}
         	onLogInChange={this.handleLogInChange}
         	logInStats={this.state.logInStats}/>);
         case "result":
-        	return (<pageResult
+        	return (<PageResult
         	onPageChange={this.handlePageChange}
         	onLogInChange={this.handleLogInChange}
         	logInStats={this.state.logInStats}/>);
         case "aboutUs":
-        	return (<pageAboutUs
+        	return (<PageAboutUs
         	onPageChange={this.handlePageChange}
         	onLogInChange={this.handleLogInChange}
         	logInStats={this.state.logInStats}/>);
