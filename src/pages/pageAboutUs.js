@@ -1,5 +1,5 @@
 import React from "react";
-
+import { TopBar } from "../elements/topbar";
 /**
  * Contact and information page.
  * @param {structure, including logInStats, and other handler functions} props 
@@ -7,6 +7,11 @@ import React from "react";
  */
 export const PageAboutUs = (props) => {
     return (
-        <p>In about us page!</p>
+        <><TopBar
+            logInStats={props.logInStats}
+            onPageChange={props.onPageChange}
+            onLogInChange={props.onLogInChange} />
+            <p>In about us page!</p>
+        </>
     );
 };

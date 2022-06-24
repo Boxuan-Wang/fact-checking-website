@@ -1,4 +1,5 @@
 import React from "react";
+import { TopBar } from "../elements/topbar";
 
 /**
  * Page where users sign in.
@@ -7,6 +8,13 @@ import React from "react";
  */
 export const PageSignIn = (props) => {
     return (
+        <>
+        <TopBar 
+        logInStats={props.logInStats}
+        onPageChange={props.onPageChange}
+        onLogInChange={props.onLogInChange} />
         <p>This a sign-in page.</p>
+        </>
+       
     );
 };
