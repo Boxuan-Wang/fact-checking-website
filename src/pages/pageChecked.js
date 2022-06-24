@@ -1,5 +1,6 @@
 import React from "react";
 import { TopBar } from "../elements/topbar";
+import { PopularClaims } from "../elements/popularClaims";
 /**
  * Popular checked result page.
  * @param {structure, including logInStats, and other handler functions} props 
@@ -7,9 +8,14 @@ import { TopBar } from "../elements/topbar";
  */
 export const PageChecked = (props) => {
     return (
-        <><TopBar
-            logInStats={props.logInStats}
-            onPageChange={props.onPageChange}
-            onLogInChange={props.onLogInChange} /><div><p>This is checked-claim page.</p></div></>
+        <>
+        <TopBar
+        logInStats={props.logInStats}
+        onPageChange={props.onPageChange}
+        onLogInChange={props.onLogInChange} />
+        <div>
+            <PopularClaims />
+        </div>
+        </>
     )
 };

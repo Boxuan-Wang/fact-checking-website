@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   /**
-   * Pass the result to show the next page. 
+   * Pass the result to show the next page. And then switch the result page.
    * @param {a structure storing full info of what the result is} newResult 
    */
   handleToShowResultChange(newResult){
