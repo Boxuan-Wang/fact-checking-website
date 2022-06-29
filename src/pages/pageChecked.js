@@ -1,5 +1,5 @@
 import React from "react";
-import { TopBar } from "../elements/topbar";
+import { NavBar } from "../elements/navBar";
 import { PopularClaims } from "../elements/popularClaims";
 /**
  * Popular checked result page.
@@ -9,7 +9,7 @@ import { PopularClaims } from "../elements/popularClaims";
 export const PageChecked = (props) => {
     return (
         <>
-        <TopBar
+        <NavBar
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />

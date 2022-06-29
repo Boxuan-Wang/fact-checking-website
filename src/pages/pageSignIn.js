@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TopBar } from "../elements/topbar";
+import { NavBar } from "../elements/navBar";
 import { signIn } from "../elements/apiCalls";
 
 
@@ -10,31 +10,58 @@ import { signIn } from "../elements/apiCalls";
  * @returns sign-in page, input boxes
  */
 export const PageSignIn = (props) => {
-    const [userName, setUserName] = useState("User name / Email");
-    const [passwd, setPasswd] = useState("Password");
 
-    function trySignIn(userInfo) {
-        if(signIn(userInfo)) {
-            props.onLogInChange({log: true, userName: userInfo.userName});
+    const [form,updateForm] = useState({
+        userName:"",
+        passwd:""
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        
+        if(signIn(form)) {
+            props.onLogInChange({log: true, userName: form.userName});
             alert("Log in successfully!");
             props.onPageChange("main");
         }
         else {
             alert("Fail to log in!");
-            setUserName("User name / Email");
-            setPasswd("Password");
+            updateForm({
+                userName:"",
+                passwd:""
+            });
         }
     };
 
     return (
         <>
-        <TopBar 
+        <NavBar 
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
-        <input type="txt" value={userName} onChange={e => setUserName(e.target.value)} />
-        <input type="txt" value={passwd} onChange={e => setPasswd(e.target.value)} />
-        <button onClick={() => trySignIn({userName:userName, passwd:passwd})}>Sign In</button>
+        <form onSubmit={handleSubmit}>
+        <div>
+            <label htmlFor="userName-id" className="label-userName">User Name</label>
+            <input 
+                type="txt" 
+                value={form.userName}
+                id="userName-id"
+                onChange={e => updateForm({userName: e.target.value})} />
+        </div>
+        <div>
+            <label htmlFor="password-id" className="label-password">Password</label>
+            <input 
+                type="password" 
+                value={form.passwd}
+                id="password-id"
+                onChange={e => updateForm({passwd:e.target.value})} />
+        </div>
+            
+        <div>
+            <input type="submit" value="Sign In" className="sign-in-button"/>
+        </div>
+            
+        </form>
         </>
        
     );

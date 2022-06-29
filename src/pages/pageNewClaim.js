@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TopBar } from "../elements/topbar";
+import { NavBar } from "../elements/navBar";
 import React from "react";
 
 
@@ -22,9 +22,9 @@ function searchResult(inputClaim) {
  * @param {a structure including logInStats, and other handler functions} props 
  */
 export const PageNewClaim = (props) => {
-    const [inputClaim,setInputClaim] = useState("Input");
+    const [inputClaim,setInputClaim] = useState("");
     return (
-        <><TopBar 
+        <><NavBar 
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
