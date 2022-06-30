@@ -104,7 +104,7 @@ export const PageSignUp = (props) => {
     
             <input type="button" 
                 value="Get Code" 
-                onClick={() =>setCorrectVeriCode(sendVeriCode(form.email))} 
+                onClick={async () =>setCorrectVeriCode(sendVeriCode(form.email))} 
                 className="get-verification-code-button" />
         </div>
         <div>
