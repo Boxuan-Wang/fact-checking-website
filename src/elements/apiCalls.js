@@ -1,22 +1,23 @@
-import React from "react";
-import { useNavigate } from "react-router";
-
 const sever_url = "http://localhost:5000";
 /**
  * API call for finding popular checked claims. Send .../popular
  * @returns A list that contains some popular results
  */
  export const getPopular = async () => {
-    const results = [
-      
-    ];
 
-  await fetch(sever_url + "/popular")
-    .then(res => res.json())
-    .then(data => results=data)
-    .catch(err => console.error(err));
-  
-  return results;
+  // await fetch(sever_url + "/popular")
+  //   .then(res => setResult(res.json()))
+  //   .catch(err => console.error(err));
+
+  const response = await fetch(sever_url + "/popular");
+
+  // if(!response.ok) {
+  //   const message = `An error occured (getPoular): ${response.status}`;
+  //   console.error(message);
+  // }
+
+  const popularClaims = await response.json();
+  return popularClaims;
 };
 
 /**
@@ -25,7 +26,7 @@ const sever_url = "http://localhost:5000";
  * @returns an auto-checked result
  */
 export const checkClaim = async (claim) => {
-  const autoResult = undefined;
+  let autoResult = undefined;
 
   await fetch(sever_url + "/check", {
     method: "PUT",
@@ -45,7 +46,7 @@ export const checkClaim = async (claim) => {
  * @returns boolean - whether log in successfully
  */
 export const signIn = async (userInfo) => {
-  const sign_sucessful = false;
+  let sign_sucessful = false;
 
   await fetch(sever_url + "/signIn", {
     method: "PUT",
@@ -65,7 +66,7 @@ export const signIn = async (userInfo) => {
  * @returns boolean - whether sign up successfully
  */
 export const signUp = async (userInfo) => {
-  const signup_success = false;
+  let signup_success = false;
 
   await fetch(sever_url + "/signUp", {
     method: "PUT",
@@ -85,7 +86,7 @@ export const signUp = async (userInfo) => {
  * @return veriCode just sent
  */
 export const sendVeriCode = async (email) => {
-  const code = undefined;
+  let code = undefined;
 
   await fetch(sever_url + "/sendCode", {
     method: "PUT",

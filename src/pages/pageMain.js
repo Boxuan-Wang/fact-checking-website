@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavBar } from '../elements/navBar.js';
+// eslint-disable-next-line
 import { PopularClaims } from "../elements/popularClaims.js"
 
 /**
@@ -24,7 +25,7 @@ export const PageMain = (props) => {
         </div>
         <div className="popularClaims">
           <h2>Popular Checked Claims</h2>
-          <PopularClaims />
+          {/* <PopularClaims /> */}
         </div>
       </>
     );

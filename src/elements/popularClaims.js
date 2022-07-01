@@ -19,3 +19,6 @@ export const PopularClaims = () => {
       <ul>{listItems}</ul>
     );
 };
+
+
+//to delete 
