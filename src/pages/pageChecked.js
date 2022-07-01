@@ -12,29 +12,19 @@ import { ResultPresent } from "../elements/resultPresent";
 export const PageChecked =  (props) => {
     
     const [popularClaims, setPopularClaims] = useState(null);
-    
-    useEffect(async () => {
-        console.error();("IN USEFFECT scope!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-        getPopular().then((res) => setPopularClaims(res)).catch(err => console.error(err));
+
+    useEffect(() => {
+        async function fetch() {
+            const res = await getPopular();
+            setPopularClaims(res);
+        }
+        fetch();        
     });
 
-    function PopularClaims() {        
-        if(popularClaims===null) {
-            // await getPopular().then((res) => setPopularClaims(res)).catch(err => console.error(err));
-            console.error("popular claims is null.")
-        }
-
-        const listItems = popularClaims.map(
-            (result) =>
-              <li>
-                <ResultPresent format="short" result={result}/>
-              </li>,
-        );
-    
-        return (
-          <ul>{listItems}</ul>
-        );
-    };
+    if(!popularClaims) {
+        console.log("waiting\n");
+        return "loading...";
+    }
 
     return (
         <>
@@ -43,7 +33,12 @@ export const PageChecked =  (props) => {
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
         <div>
-            <PopularClaims />
+            <ul>
+                {popularClaims.map((result) =>
+                <li key={result.claim}>
+                    <ResultPresent format="short" result={result}/>
+                </li>)}
+            </ul>
         </div>
         </>
     )

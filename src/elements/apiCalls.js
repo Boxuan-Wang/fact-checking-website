@@ -4,19 +4,9 @@ const sever_url = "http://localhost:5000";
  * @returns A list that contains some popular results
  */
  export const getPopular = async () => {
-
-  // await fetch(sever_url + "/popular")
-  //   .then(res => setResult(res.json()))
-  //   .catch(err => console.error(err));
-
   const response = await fetch(sever_url + "/popular");
-
-  // if(!response.ok) {
-  //   const message = `An error occured (getPoular): ${response.status}`;
-  //   console.error(message);
-  // }
-
   const popularClaims = await response.json();
+  console.log(popularClaims[0].claim);
   return popularClaims;
 };
 
