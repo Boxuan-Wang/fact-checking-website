@@ -70,6 +70,7 @@ test('test signIn API return false', async () => {
         })
     );
 
+    
     await act(async () => result = await signIn(""));
     expect(result).toBe(false);
 
@@ -86,7 +87,11 @@ test('test signUp API return false', async () => {
         })
     );
 
-    await act(async () => result = await signUp(""));
+    const userInfo = {
+        userName: "testlocal@test.com",
+        passwd:"test"
+    };
+    await act(async () => result = await signUp(userInfo));
     expect(result).toBe(false);
 
     global.fetch.mockRestore();
@@ -102,7 +107,12 @@ test('test signUp API return true', async () => {
         })
     );
 
-    await act(async () => result = await signUp(""));
+    
+    const userInfo = {
+        userName: "testlocal@test.com",
+        passwd:"test"
+    };
+    await act(async () => result = await signUp(userInfo));
     expect(result).toBe(true);
 
     global.fetch.mockRestore();
