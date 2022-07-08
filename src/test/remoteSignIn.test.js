@@ -18,7 +18,7 @@ afterAll(async () => {
         userName: "testremote@test.com",
         passwd:"testremote"
     };
-    let res = await deleteUser(userInfo);
+    let res = await deleteUser({userName: userInfo.userName});
     if(!res) throw new Error("Cannot delete test account: " + userInfo.userName);
 });
 

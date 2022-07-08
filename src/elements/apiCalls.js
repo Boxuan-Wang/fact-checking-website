@@ -36,7 +36,10 @@ export const signIn = async (userInfo) => {
 
   await fetch(sever_url + "/signIn", {
     method: "POST",
-    body: userInfo,
+    body: JSON.stringify({
+      userName: userInfo.userName,
+      passwd: userInfo.passwd
+    }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -59,7 +62,10 @@ export const signUp = async (userInfo) => {
 
   await fetch(sever_url + "/signUp", {
     method: "POST",
-    body: userInfo,
+    body: JSON.stringify({
+      userName: userInfo.userName,
+      passwd: userInfo.passwd
+    }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -81,7 +87,7 @@ export const sendVeriCode = async (emailAddress) => {
   let code = undefined;
   await fetch(sever_url + "/sendCode", {
     method: "POST",
-    body: {email:emailAddress},
+    body: JSON.stringify({email:emailAddress}),
     headers: {
       "Content-Type": "application/json",
     },
@@ -103,7 +109,7 @@ export const deleteUser = async (userName) => {
   let delete_success = false;
   await fetch(sever_url + "/deleteUser", {
     method:"POST",
-    body:{userName: userName},
+    body:JSON.stringify({userName: userName}),
       headers: {
       "Content-Type": "application/json",
     },
