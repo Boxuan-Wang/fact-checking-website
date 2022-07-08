@@ -79,7 +79,6 @@ export const signUp = async (userInfo) => {
  */
 export const sendVeriCode = async (emailAddress) => {
   let code = undefined;
-  alert("Sending code.");
   await fetch(sever_url + "/sendCode", {
     method: "POST",
     body: {email:emailAddress},
@@ -110,7 +109,7 @@ export const deleteUser = async (userName) => {
     },
   })
   .then(res => res.json())
-  .then(data => delete_success = data)
+  .then(data => delete_success = (data!==null&&data!==undefined))
   .catch(err => console.error(err));
   
   return delete_success;
