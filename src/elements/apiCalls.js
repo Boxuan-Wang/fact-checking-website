@@ -1,4 +1,4 @@
-const sever_url = "http://202.61.203.255:5000";
+const sever_url = "http://localhost:5000";
 /**
  * API call for finding popular checked claims. Send .../popular
  * @returns A list that contains some popular results
