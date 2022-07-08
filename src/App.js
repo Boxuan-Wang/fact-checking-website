@@ -1,42 +1,37 @@
 import './App.css';
 import React from 'react';
-import {PageMain} from './pages/pageMain';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
+import { PageMain } from './pages/pageMain';
+import { PageNewClaim } from "./pages/pageNewClaim";
+import { PageChecked } from "./pages/pageChecked";
+import { PageSignIn } from "./pages/pageSignIn";
+import { PageSignUp } from "./pages/pageSignUp";
+import { PageResult } from "./pages/pageResult";
+import { PageAboutUs} from "./pages/pageAboutUs";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleLogInChange = this.handleLogInChange.bind(this);
+    this.handleToShowResultChange = this.handleToShowResultChange.bind(this);
     this.state = {
-      page: 'main',
+      page: "main",
       logInStats: {log: false, userName: undefined},
+      toShowResult: {claim: undefined, autoResult:undefined, humanResult: undefined}
     };
   }
 
   /**
-	 *
+   * Pass the result to show the next page. And then switch the result page.
+   * @param {a structure storing full info of what the result is} newResult 
+   */
+  handleToShowResultChange(newResult){
+    this.setState({toShowResult: newResult});
+    this.setState({page:"result"});
+  }
+
+  /**
+	 * Manage page change
 	 * @param {a string indicate which page in activated} newPage
 	 */
   handlePageChange(newPage) {
@@ -44,7 +39,7 @@ class App extends React.Component {
   }
 
   /**
-	 *
+	 * Change the logIn state of the app
 	 * @param {a structure including: log(bool), userName} logInStats
 	 */
   handleLogInChange(logInStats) {
@@ -56,42 +51,52 @@ class App extends React.Component {
       case 'main':
         return (<PageMain
           onPageChange={this.handlePageChange}
-          onLogInChange={this.handleLogInChange}
-          logInStats={this.state.logInStats}
+          onLogInChange={this.handleLogInChange} 
+          onResultChange={this.handleToShowResultChange}
+          logInStats={this.state.logInStats} 
+          resultToshow={this.state.toShowResult}
         />);
         case "signIn":
-        	return (<pageSignIn
+        	return (<PageSignIn
         	onPageChange={this.handlePageChange}
-        	onLogInChange={this.handleLogInChange}
+          onLogInChange={this.handleLogInChange} 
+          onResultChange={this.handleToShowResultChange}
         	logInStats={this.state.logInStats}/>);
         case "signUp":
-        	return (<pageSignUp
+        	return (<PageSignUp
         	onPageChange={this.handlePageChange}
-        	onLogInChange={this.handleLogInChange}
+          onLogInChange={this.handleLogInChange} 
+          onResultChange={this.handleToShowResultChange}
         	logInStats={this.state.logInStats}/>);
         case "checked":
-        	return (<pageChecked
+        	return (<PageChecked
         	onPageChange={this.handlePageChange}
-        	onLogInChange={this.handleLogInChange}
+          onLogInChange={this.handleLogInChange} 
+          onResultChange={this.handleToShowResultChange}
         	logInStats={this.state.logInStats}/>);
         case "newClaim":
-        	return (<pageNewClaim
+        	return (<PageNewClaim
         	onPageChange={this.handlePageChange}
-        	onLogInChange={this.handleLogInChange}
+          onLogInChange={this.handleLogInChange} 
+          onResultChange={this.handleToShowResultChange}
         	logInStats={this.state.logInStats}/>);
         case "result":
-        	return (<pageResult
+        	return (<PageResult
         	onPageChange={this.handlePageChange}
-        	onLogInChange={this.handleLogInChange}
-        	logInStats={this.state.logInStats}/>);
+          onLogInChange={this.handleLogInChange} 
+          onResultChange={this.handleToShowResultChange}
+        	logInStats={this.state.logInStats} 
+          resultToShow={this.state.toShowResult}
+          />);
         case "aboutUs":
-        	return (<pageAboutUs
+        	return (<PageAboutUs
         	onPageChange={this.handlePageChange}
-        	onLogInChange={this.handleLogInChange}
+          onLogInChange={this.handleLogInChange} 
+          onResultChange={this.handleToShowResultChange}
         	logInStats={this.state.logInStats}/>);
       default:
         throw new Error('No such page.');
-    }
+    };
   }
 }
 
