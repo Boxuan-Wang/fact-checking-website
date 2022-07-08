@@ -4,7 +4,7 @@ import { getPopular, checkClaim, signIn, signUp, sendVeriCode, deleteUser } from
 
 const serverUrl = "http://127.0.0.1:5000";
 
-beforeAll(async () => {
+beforeEach(async () => {
     const userInfo = {
         userName: "testremote@test.com",
         passwd:"testremote"
@@ -13,12 +13,12 @@ beforeAll(async () => {
     if(!res) throw new Error("Cannot create test account: " + userInfo.userName);
 });
 
-afterAll(async () => {
+afterEach(async () => {
     const userInfo = {
         userName: "testremote@test.com",
         passwd:"testremote"
     };
-    let res = await deleteUser({userName: userInfo.userName});
+    let res = await deleteUser(userInfo.userName);
     if(!res) throw new Error("Cannot delete test account: " + userInfo.userName);
 });
 

@@ -109,7 +109,7 @@ export const deleteUser = async (userName) => {
   let delete_success = false;
   await fetch(sever_url + "/deleteUser", {
     method:"POST",
-    body:JSON.stringify({userName: userName}),
+    body: JSON.stringify({userName: userName}),
       headers: {
       "Content-Type": "application/json",
     },
