@@ -5,7 +5,7 @@ export const ResultPresent = (props) => {
     if (props.format==='short') {
       // format used in main page
       return (
-        <><p className="shortPreClaim">{props.result.claim}</p></>
+        <><div className="shortPreClaim">{props.result.claim}</div></>
       );
     } else throw new Error('Not a format for result representing.');
 };

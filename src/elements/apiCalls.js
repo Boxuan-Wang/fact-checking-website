@@ -1,4 +1,4 @@
-const sever_url = "http://localhost:5000";
+const sever_url = "http://202.61.203.255:5000";
 /**
  * API call for finding popular checked claims. Send .../popular
  * @returns A list that contains some popular results
@@ -6,7 +6,7 @@ const sever_url = "http://localhost:5000";
  export const getPopular = async () => {
   const response = await fetch(sever_url + "/popular");
   const popularClaims = await response.json();
-  console.log(popularClaims[0].claim);
+  // console.log(popularClaims[0].claim);
   return popularClaims;
 };
 
@@ -16,17 +16,13 @@ const sever_url = "http://localhost:5000";
  * @returns an auto-checked result
  */
 export const checkClaim = async (claim) => {
-  let autoResult = undefined;
-
-  await fetch(sever_url + "/check", {
-    method: "PUT",
+  const response = await fetch(sever_url + "/check", {
+    method: "POST",
     body: JSON.stringify(claim),
-  })
-  .then(res => res.json())
-  .then(data => autoResult = data)
-  .catch(err => console.error(err));
-
-    return autoResult;
+  });
+  const result = await response.json();
+  // console.log(result);
+  return result;
 };
 
 /**
@@ -39,8 +35,11 @@ export const signIn = async (userInfo) => {
   let sign_sucessful = false;
 
   await fetch(sever_url + "/signIn", {
-    method: "PUT",
+    method: "POST",
     body: userInfo,
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
   .then(res => res.json())
   .then(data => sign_sucessful=data)
@@ -59,8 +58,11 @@ export const signUp = async (userInfo) => {
   let signup_success = false;
 
   await fetch(sever_url + "/signUp", {
-    method: "PUT",
+    method: "POST",
     body: userInfo,
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
   .then(res => res.json())
   .then(data => signup_success = data)
@@ -72,18 +74,21 @@ export const signUp = async (userInfo) => {
 /**
  * Send a verification code to the given email.
  * Send .../sendCode
- * @param {string} email 
+ * @param {string} emailAddress 
  * @return veriCode just sent
  */
-export const sendVeriCode = async (email) => {
+export const sendVeriCode = async (emailAddress) => {
   let code = undefined;
-
+  alert("Sending code.");
   await fetch(sever_url + "/sendCode", {
-    method: "PUT",
-    body: email,
+    method: "POST",
+    body: {email:emailAddress},
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
   .then(res => res.json())
-  .then(data => code=data)
+  .then(data => code=data.veriCode)
   .catch(err => console.error(err));
 
   return code;
