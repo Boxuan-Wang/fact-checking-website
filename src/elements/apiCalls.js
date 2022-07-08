@@ -93,3 +93,25 @@ export const sendVeriCode = async (emailAddress) => {
 
   return code;
 };
+
+/**
+ * Delete an account with given userName.
+ * @param {string} userName 
+ * @returns {boolean} delete success
+ */
+export const deleteUser = async (userName) => {
+
+  let delete_success = false;
+  await fetch(sever_url + "/deleteUser", {
+    method:"POST",
+    body:{userName: userName},
+      headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(res => res.json())
+  .then(data => delete_success = data)
+  .catch(err => console.error(err));
+  
+  return delete_success;
+}
