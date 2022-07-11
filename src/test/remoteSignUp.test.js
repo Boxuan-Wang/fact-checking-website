@@ -29,10 +29,13 @@ test('test remote sign up success', async () => {
     };
 
     let result;
-    await act(async () => result = await signUp(userInfo));
+    let del_succ;
+    await act(async () => {
+        result = await signUp(userInfo);
+        del_succ = await deleteUser(userInfo.userName);
+    });
     expect(result).toBe(true);
-    let del_succ = await deleteUser({userName: userInfo.userName});
-    if(!del_succ) throw new Error("cannot delete user in sign up succ test");
+    expect(del_succ).toBe(true);
 });
 
 test('test remote sign up fail with used email', async () => {

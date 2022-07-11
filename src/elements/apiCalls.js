@@ -86,7 +86,7 @@ export const signUp = async (userInfo) => {
 export const sendVeriCode = async (emailAddress) => {
   console.log("sending email");
   let code = undefined;
-  await fetch(sever_url + "/sendCode", {
+  await fetch(sever_url + "/email", {
     method: "POST",
     body: JSON.stringify({email:emailAddress}),
     headers: {

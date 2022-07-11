@@ -16,10 +16,10 @@ export const PageSignIn = (props) => {
         passwd:""
     });
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         
-        if(signIn(form)) {
+        if(await signIn(form)) {
             props.onLogInChange({log: true, userName: form.userName});
             alert("Log in successfully!");
             props.onPageChange("main");
