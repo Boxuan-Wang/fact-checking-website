@@ -1,4 +1,4 @@
-const sever_url = "http://localhost:5000";
+const sever_url = "http://202.61.201.7:5000";
 /**
  * API call for finding popular checked claims. Send .../popular
  * @returns A list that contains some popular results
@@ -84,8 +84,9 @@ export const signUp = async (userInfo) => {
  * @return veriCode just sent
  */
 export const sendVeriCode = async (emailAddress) => {
+  console.log("sending email");
   let code = undefined;
-  await fetch(sever_url + "/sendCode", {
+  await fetch(sever_url + "/email", {
     method: "POST",
     body: JSON.stringify({email:emailAddress}),
     headers: {

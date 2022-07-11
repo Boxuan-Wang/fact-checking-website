@@ -2,7 +2,6 @@ import React from 'react';
 import {act} from 'react-dom/test-utils';
 import { getPopular, checkClaim, signIn, signUp, sendVeriCode, deleteUser } from '../elements/apiCalls';
 
-const serverUrl = "http://127.0.0.1:5000";
 
 beforeEach(async () => {
     const userInfo = {
