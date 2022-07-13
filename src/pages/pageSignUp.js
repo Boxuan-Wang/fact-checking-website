@@ -16,20 +16,22 @@ export const PageSignUp = (props) => {
     );
 
     //eslint-disable-next-line
-    const [correctVeriCode, setCorrectVeriCode] = useState("");
+    const [correctVeriCode, setCorrectVeriCode] = useState(0);
 
     async function handleSubmit(e) {
         e.preventDefault();
+        alert("submit");
         
-        if(correctVeriCode===form.veriCode) {
+        if(correctVeriCode===parseInt(form.veriCode) && form.confirmPasswd===form.passwd) {
             //sign up is async
-            if(await signUp({userName:form.email, passwd:form.passwd})) {
+            let signup_success = await signUp({userName:form.email, passwd:form.passwd})
+            if(signup_success) {
                 alert("signed up successfully!");
                 return;
             }
             else {
                 alert("Email cannot be used! Sign up failed!");
-                form.updateForm({
+                updateForm({
                     userName:"",
                     email:"",
                     passwd:"",
@@ -38,9 +40,28 @@ export const PageSignUp = (props) => {
                 });
             }
         }
-        else {
+
+        else if(form.confirmPasswd===form.passwd) {
+            alert("Different password input");
+            updateForm({
+                userName:"",
+                passwd:"",
+                confirmPasswd:"",
+                veriCode:""}
+            );
+        }
+        else if (form.passwd.length<6) {
+            alert("the length of password should be at least 6")
+            updateForm({
+                userName:"",
+                passwd:"",
+                confirmPasswd:"",
+                veriCode:""}
+            );
+        }
+        else if(correctVeriCode!==parseInt(form.veriCode)){
             alert("Wrong verification code!");
-            form.updateForm({veriCode:""});
+            updateForm({veriCode:""});
         }
     };
 
@@ -76,7 +97,7 @@ export const PageSignUp = (props) => {
         <div>
             <label htmlFor="password-id" className="label-password">Password</label>
             <input 
-            type="password" 
+            type="txt" 
             name="password"
             id="password-id"
             value={form.passwd} 
@@ -86,7 +107,7 @@ export const PageSignUp = (props) => {
         <div>
             <label htmlFor="confirm-password-id" className="label-confirm-password">Confirm Password</label>
             <input 
-            type="password" 
+            type="txt" 
             name="confirm password"
             id="cinfirm-password-id"
             value={form.confirmPasswd} 
@@ -104,7 +125,7 @@ export const PageSignUp = (props) => {
     
             <input type="button" 
                 value="Get Code" 
-                onClick={async () =>setCorrectVeriCode(sendVeriCode(form.email))} 
+                onClick={async () =>setCorrectVeriCode(parseInt(await sendVeriCode(form.email)))} 
                 className="get-verification-code-button" />
         </div>
         <div>
