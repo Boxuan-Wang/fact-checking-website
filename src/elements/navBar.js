@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../logo.svg';
+import "./navBar.css";
 
 /**
  * 
@@ -10,25 +11,25 @@ export const NavBar = (props) => {
   // for the constructor, need a field: logInStats
     if (props.logInStats.log===false) {
       return (
-        <header>
+        <div className='nav'>
           <img src={logo} className="app-logo" alt='logo' onClick={() => props.onPageChange("main")}/>
-          <button onClick={() => props.onPageChange("checked")}>Checked</button>
-          <button onClick={() => props.onPageChange("newClaim")}>New Claim</button>
-          <button onClick={() => props.onPageChange("aboutUs")}>About Us</button>
+          <button className='page' onClick={() => props.onPageChange("checked")}>Checked</button>
+          <button className='page' onClick={() => props.onPageChange("newClaim")}>New Claim</button>
+          <button className='page' onClick={() => props.onPageChange("aboutUs")}>About Us</button>
           <button className="signInButton" onClick={() => props.onPageChange("signIn")}>Sign In</button>
-          <button onClick={() => props.onPageChange("signUp")}>Sign Up</button>
-        </header>
+          <button className='signUpButton' onClick={() => props.onPageChange("signUp")}>Sign Up</button>
+        </div>
       );
     } else {
       return (
-        <header>
+        <div>
           <img src={logo} className='app-logo' alt='logo' />
           <button onClick={() => props.onPageChange("checked")}>Checked</button>
           <button onClick={() => props.onPageChange("newClaim")}>New Claim</button>
           <button onClick={() => props.onPageChange("aboutUs")}>About Us</button>
           <p className="userName">{props.logInStats.userName}</p>
           <button onClick={() => props.onLogInChange({log:false, userName: undefined})}>Sign Out</button>
-        </header>
+        </div>
       );
     }
 }

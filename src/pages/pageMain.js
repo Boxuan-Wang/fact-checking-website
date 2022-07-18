@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavBar } from '../elements/navBar.js';
+import "./pageMain.css";
 // eslint-disable-next-line
 import { PopularClaims } from "../elements/popularClaims.js"
 
@@ -16,12 +17,15 @@ export const PageMain = (props) => {
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
-        <div className="heading">
+        <div className='left-col'>
           <h1>Auto Fact Checking</h1>
-          <p>Enter any claim you can think of.
+          <div className="intro">
+             <p>Enter any claim you can think of.
                 Let AI find some evidence and
                 justify that for you.</p>
-          <button onClick={() => props.onPageChange("newClaim")}>Make A Claim</button>
+          </div>
+         
+          <button className='makeclaim' onClick={() => props.onPageChange("newClaim")}>Make A Claim</button>
         </div>
         <div className="popularClaims">
           <h2>Popular Checked Claims</h2>
