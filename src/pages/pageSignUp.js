@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { NavBar } from "../elements/navBar";
 import { signUp } from "../elements/apiCalls";
 import { sendVeriCode } from "../elements/apiCalls";
-
+import "./pageSignUp.css";
 
 export const PageSignUp = (props) => {
     const [form, updateForm] = useState(
         {
-            userName:"",
             email:"",
             passwd:"",
             confirmPasswd:"",
@@ -20,17 +19,20 @@ export const PageSignUp = (props) => {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        // alert("submit");
+        // alert(JSON.stringify(form));
+        // alert("Correct veri: " + correctVeriCode);
         
-        if(correctVeriCode===form.veriCode) {
+        if(correctVeriCode===form.veriCode && form.confirmPasswd===form.passwd) {
             //sign up is async
-            if(await signUp({userName:form.email, passwd:form.passwd})) {
+            let signup_success = await signUp({userName:form.email, passwd:form.passwd})
+            if(signup_success) {
                 alert("signed up successfully!");
                 return;
             }
             else {
                 alert("Email cannot be used! Sign up failed!");
                 form.updateForm({
-                    userName:"",
                     email:"",
                     passwd:"",
                     confirmPasswd:"",
@@ -38,9 +40,30 @@ export const PageSignUp = (props) => {
                 });
             }
         }
-        else {
+        else if (form.passwd === undefined || form.passwd===null || form.passwd.length<6)  {
+            alert("the length of password should be at least 6")
+            updateForm({
+                passwd:"",
+                confirmPasswd:"",
+                veriCode:""}
+            );
+        }
+        else if(form.confirmPasswd!==form.passwd) {
+            alert("Different password input");
+            updateForm({
+                passwd:"",
+                confirmPasswd:"",
+                veriCode:""}
+            );
+        }
+
+        else if(correctVeriCode!==form.veriCode){
             alert("Wrong verification code!");
-            form.updateForm({veriCode:""});
+            updateForm({veriCode:""});
+        }
+
+        else {
+            alert("Unkown?");
         }
     };
 
@@ -53,68 +76,80 @@ export const PageSignUp = (props) => {
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
 
-        <form onSubmit={handleSubmit}>
-        <div>
-            <label htmlFor="user-name-id" className="label-user-name">User Name</label>
-            <input 
-            type="txt" 
-            name="user name"
-            id="user-name-id"
-            value={form.userName} 
-            onChange={e => updateForm({userName:e.target.value})} />
-            
-        </div>
-        <div>
-            <label htmlFor="email-id" className="label-email">Email</label>
-            <input 
-            type="email" 
-            name="email"
-            id="email-id"
-            value={form.email} 
-            onChange={e => updateForm({email:e.target.value})} />
-        </div>
-        <div>
-            <label htmlFor="password-id" className="label-password">Password</label>
-            <input 
-            type="password" 
-            name="password"
-            id="password-id"
-            value={form.passwd} 
-            onChange={e => updateForm({passwd:e.target.value})} />
-        </div>
-            
-        <div>
-            <label htmlFor="confirm-password-id" className="label-confirm-password">Confirm Password</label>
-            <input 
-            type="password" 
-            name="confirm password"
-            id="cinfirm-password-id"
-            value={form.confirmPasswd} 
-            onChange={e => updateForm({confirmPasswd:e.target.value})} />
-        </div>
-            
-        <div>
-            <label htmlFor="verification-id" className="label-verification">Verify Email</label>
-            <input 
-            type="txt" 
-            name="Verify email"
-            id="verification-id"
-            value={form.veriCode} 
-            onChange={e => updateForm({veriCode:e.target.value})} />
-    
-            <input type="button" 
-                value="Get Code" 
-                onClick={async () =>setCorrectVeriCode(sendVeriCode(form.email))} 
-                className="get-verification-code-button" />
-        </div>
-        <div>
-            <input 
-                type="submit" 
-                value="Sign Up" 
-                className="Sign-up-button"/>
-        </div>
-            
-        </form>        
+        <div className="form-element">
+            <form onSubmit={handleSubmit}>
+            <div className="form-item">
+                <label htmlFor="email-id" className="label-email">Email</label>
+                <input 
+                type="email" 
+                name="email"
+                id="email-id"
+                value={form.email} 
+                onChange={e => updateForm({
+                    email: e.target.value,
+                    passwd: form.passwd,
+                    confirmPasswd: form.confirmPasswd,
+                    veriCode: form.veriCode
+                })} />
+            </div>
+            <div className="form-item">
+                <label htmlFor="password-id" className="label-password">Password</label>
+                <input 
+                type="password" 
+                name="password"
+                id="password-id"
+                value={form.passwd} 
+                onChange={e => updateForm({
+                    email: form.email,
+                    passwd: e.target.value,
+                    confirmPasswd: form.confirmPasswd,
+                    veriCode: form.veriCode
+                })} />
+            </div>
+                
+            <div className="form-item">
+                <label htmlFor="confirm-password-id" className="label-confirm-password">Confirm Password</label>
+                <input 
+                type="password" 
+                name="confirm password"
+                id="cinfirm-password-id"
+                value={form.confirmPasswd} 
+                onChange={e => updateForm({
+                    email: form.email,
+                    passwd: form.passwd,
+                    confirmPasswd: e.target.value,
+                    veriCode: form.veriCode
+                })} />
+            </div>
+                
+            <div className="form-item">
+                <label htmlFor="verification-id" className="label-verification">Verify Email</label>
+                <input 
+                type="txt" 
+                name="Verify email"
+                id="verification-id"
+                value={form.veriCode} 
+                onChange={e => updateForm({
+                    email: form.email,
+                    passwd: form.passwd,
+                    confirmPasswd: form.confirmPasswd,
+                    veriCode: e.target.value
+                })} />
+        
+                <input type="button" 
+                    value="Get Code" 
+                    onClick={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} 
+                    className="get-verification-code-button" />
+            </div>
+            <div className="form-item">
+                <input 
+                    type="submit" 
+                    value="Sign Up" 
+                    className="Sign-up-button"/>
+            </div>
+                
+            </form>
+        </div>        
         </>
     )
 };

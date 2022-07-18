@@ -1,0 +1,55 @@
+body {
+    background-color: #f1f4f4;
+    margin-top: 0%;
+}
+
+.nav {
+    background-color: #d9d9d9;
+    height: 40px;
+    width: 150%;
+    margin-top: 0px;
+    padding: 0% 12px;
+    overflow: hidden;
+}
+
+.nav button {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    text-align: center;
+    width: 8%;
+}
+
+.page {
+    background-color: #d9d9d9;
+    margin: 0 1%;
+    height: 40px;
+}
+
+.page:hover {
+    background-color: white;
+}
+
+.signInButton {
+    background-color: #94DE88;
+    position: absolute;
+    right: 9%;
+    margin: 5px 1%;
+    height: 30px;
+}
+.signInButton:hover {
+    background-color: #53994a;
+}
+
+.signUpButton {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin-right: 0px;
+    margin-left: 1%;
+    height: 40px;
+    background-color: #d9d9d9;
+}
+.signUpButton:hover {
+    background-color: white;
+}
