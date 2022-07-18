@@ -22,7 +22,7 @@ export const PageSignUp = (props) => {
         
         if(correctVeriCode===form.veriCode) {
             //sign up is async
-            if(signUp({userName:form.email, passwd:form.passwd})) {
+            if(await signUp({userName:form.email, passwd:form.passwd})) {
                 alert("signed up successfully!");
                 return;
             }
