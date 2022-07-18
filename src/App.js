@@ -7,9 +7,11 @@ import { PageSignIn } from "./pages/pageSignIn";
 import { PageSignUp } from "./pages/pageSignUp";
 import { PageResult } from "./pages/pageResult";
 import { PageAboutUs} from "./pages/pageAboutUs";
+import Cookies from 'js-cookie'; 
+import { signIn } from './elements/apiCalls';
 
 class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleLogInChange = this.handleLogInChange.bind(this);
@@ -18,7 +20,21 @@ class App extends React.Component {
       page: "main",
       logInStats: {log: false, userName: undefined},
       toShowResult: {claim: undefined, autoResult:undefined, humanResult: undefined}
-    };
+    }
+
+  }
+
+  async componentDidMount() {
+    //when initialising the page, read cookie
+    let loginCookieValue = Cookies.get('averitectLogIn');
+    if(loginCookieValue){
+      //parse the value in cookie (username + passwd)
+      const userInfo = JSON.parse(loginCookieValue);
+      const result = await signIn(userInfo);
+      if(result) {
+       this.setState({logInStats: {log:true, userName: userInfo.userName}});
+      }
+    }
   }
 
   /**
@@ -40,10 +56,16 @@ class App extends React.Component {
 
   /**
 	 * Change the logIn state of the app
-	 * @param {a structure including: log(bool), userName} logInStats
+	 * @param {a structure including: log(bool), userName, cookie jwt} logInStats
 	 */
-  handleLogInChange(logInStats) {
+  handleLogInChange(logInStats, cookieValue) {
     this.setState({logInStats: logInStats});
+    if(logInStats.log){
+      Cookies.set('averitectLogIn', cookieValue, {expires: 7});
+    }
+    else {
+      Cookies.remove('averitectLogIn');
+    }
   }
 
   render() {
