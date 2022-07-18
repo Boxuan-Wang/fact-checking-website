@@ -1,0 +1,43 @@
+.left-col {
+    float: left;
+    width: 70%;
+    left: 0px;
+}
+
+.intro {
+    position: relative;
+    margin-left: 5%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    font-size: 50px;
+    position: relative;
+    margin-left: 5%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.makeclaim {
+    background-color: #889BDE;
+    width: 200px;
+    height: 90px;
+    text-align: center;
+    border-radius: 17px;
+    font-size: 20px;
+    position: relative;
+    left:10%;
+    border: none;
+    left: 10%;
+    top: 35px;
+}
+
+.makeclaim:hover {
+    background-color: #606d9e;
+    color: white;
+}
+.popularClaims {
+    float: right;
+    background-color: #889BDE;
+    height: fit-content;
+    right:0px;
+}
