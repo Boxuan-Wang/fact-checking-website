@@ -46,7 +46,10 @@ export const PageSignIn = (props) => {
                 type="txt" 
                 value={form.userName}
                 id="userName-id"
-                onChange={e => updateForm({userName: e.target.value})} />
+                onChange={e => updateForm({
+                    userName: e.target.value,
+                    passwd: form.passwd
+                })} />
         </div>
         <div>
             <label htmlFor="password-id" className="label-password">Password</label>
@@ -54,7 +57,10 @@ export const PageSignIn = (props) => {
                 type="password" 
                 value={form.passwd}
                 id="password-id"
-                onChange={e => updateForm({passwd:e.target.value})} />
+                onChange={e => updateForm({
+                    userName:form.userName,
+                    passwd:e.target.value
+                })} />
         </div>
             
         <div>

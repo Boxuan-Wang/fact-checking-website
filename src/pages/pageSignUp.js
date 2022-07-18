@@ -15,13 +15,15 @@ export const PageSignUp = (props) => {
     );
 
     //eslint-disable-next-line
-    const [correctVeriCode, setCorrectVeriCode] = useState(0);
+    const [correctVeriCode, setCorrectVeriCode] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
-        alert("submit");
+        // alert("submit");
+        // alert(JSON.stringify(form));
+        // alert("Correct veri: " + correctVeriCode);
         
-        if(correctVeriCode===parseInt(form.veriCode) && form.confirmPasswd===form.passwd) {
+        if(correctVeriCode===form.veriCode && form.confirmPasswd===form.passwd) {
             //sign up is async
             let signup_success = await signUp({userName:form.email, passwd:form.passwd})
             if(signup_success) {
@@ -38,28 +40,30 @@ export const PageSignUp = (props) => {
                 });
             }
         }
-
-        else if(form.confirmPasswd===form.passwd) {
-            alert("Different password input");
-            updateForm({
-                userName:"",
-                passwd:"",
-                confirmPasswd:"",
-                veriCode:""}
-            );
-        }
-        else if (form.passwd.length<6) {
+        else if (form.passwd === undefined || form.passwd===null || form.passwd.length<6)  {
             alert("the length of password should be at least 6")
             updateForm({
-                userName:"",
                 passwd:"",
                 confirmPasswd:"",
                 veriCode:""}
             );
         }
-        else if(correctVeriCode!==parseInt(form.veriCode)){
+        else if(form.confirmPasswd!==form.passwd) {
+            alert("Different password input");
+            updateForm({
+                passwd:"",
+                confirmPasswd:"",
+                veriCode:""}
+            );
+        }
+
+        else if(correctVeriCode!==form.veriCode){
             alert("Wrong verification code!");
             updateForm({veriCode:""});
+        }
+
+        else {
+            alert("Unkown?");
         }
     };
 
@@ -81,7 +85,12 @@ export const PageSignUp = (props) => {
                 name="email"
                 id="email-id"
                 value={form.email} 
-                onChange={e => updateForm({email:e.target.value})} />
+                onChange={e => updateForm({
+                    email: e.target.value,
+                    passwd: form.passwd,
+                    confirmPasswd: form.confirmPasswd,
+                    veriCode: form.veriCode
+                })} />
             </div>
             <div className="form-item">
                 <label htmlFor="password-id" className="label-password">Password</label>
@@ -90,7 +99,12 @@ export const PageSignUp = (props) => {
                 name="password"
                 id="password-id"
                 value={form.passwd} 
-                onChange={e => updateForm({passwd:e.target.value})} />
+                onChange={e => updateForm({
+                    email: form.email,
+                    passwd: e.target.value,
+                    confirmPasswd: form.confirmPasswd,
+                    veriCode: form.veriCode
+                })} />
             </div>
                 
             <div className="form-item">
@@ -100,7 +114,12 @@ export const PageSignUp = (props) => {
                 name="confirm password"
                 id="cinfirm-password-id"
                 value={form.confirmPasswd} 
-                onChange={e => updateForm({confirmPasswd:e.target.value})} />
+                onChange={e => updateForm({
+                    email: form.email,
+                    passwd: form.passwd,
+                    confirmPasswd: e.target.value,
+                    veriCode: form.veriCode
+                })} />
             </div>
                 
             <div className="form-item">
@@ -110,11 +129,16 @@ export const PageSignUp = (props) => {
                 name="Verify email"
                 id="verification-id"
                 value={form.veriCode} 
-                onChange={e => updateForm({veriCode:e.target.value})} />
+                onChange={e => updateForm({
+                    email: form.email,
+                    passwd: form.passwd,
+                    confirmPasswd: form.confirmPasswd,
+                    veriCode: e.target.value
+                })} />
         
                 <input type="button" 
                     value="Get Code" 
-                    onClick={async () =>setCorrectVeriCode(sendVeriCode(form.email))} 
+                    onClick={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} 
                     className="get-verification-code-button" />
             </div>
             <div className="form-item">
