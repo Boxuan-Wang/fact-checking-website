@@ -22,13 +22,13 @@ export const NavBar = (props) => {
       );
     } else {
       return (
-        <div>
+        <div className='nav'>
           <img src={logo} className='app-logo' alt='logo' />
-          <button onClick={() => props.onPageChange("checked")}>Checked</button>
-          <button onClick={() => props.onPageChange("newClaim")}>New Claim</button>
-          <button onClick={() => props.onPageChange("aboutUs")}>About Us</button>
-          <p className="userName">{props.logInStats.userName}</p>
-          <button onClick={() => props.onLogInChange({log:false, userName: undefined})}>Sign Out</button>
+          <button className='page' onClick={() => props.onPageChange("checked")}>Checked</button>
+          <button className='page' onClick={() => props.onPageChange("newClaim")}>New Claim</button>
+          <button className='page' onClick={() => props.onPageChange("aboutUs")}>About Us</button>
+          <button className="userName">{props.logInStats.userName}</button>
+          <button className='signOutButton'onClick={() => props.onLogInChange({log:false, userName: undefined})}>Sign Out</button>
         </div>
       );
     }
