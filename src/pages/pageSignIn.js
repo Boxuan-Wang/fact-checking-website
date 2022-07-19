@@ -3,7 +3,6 @@ import { NavBar } from "../elements/navBar";
 import { signIn } from "../elements/apiCalls";
 
 
-
 /**
  * Page where users sign in.
  * @param {a structure including logInStats, and other handler functions} props 
@@ -20,7 +19,8 @@ export const PageSignIn = (props) => {
         e.preventDefault();
         
         if(await signIn(form)) {
-            props.onLogInChange({log: true, userName: form.userName});
+            //todo: change to cookie version
+            props.onLogInChange({log: true, userName: form.userName}, JSON.stringify(form));
             alert("Log in successfully!");
             props.onPageChange("main");
         }
