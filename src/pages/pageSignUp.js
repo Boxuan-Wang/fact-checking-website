@@ -24,8 +24,10 @@ export const PageSignUp = (props) => {
         // alert(JSON.stringify(form));
         // alert("Correct veri: " + correctVeriCode);
         const hashedInputVeriCode = createHash('sha256').update(form.veriCode).digest('hex');
-        if(correctHashedVeriCode=== hashedInputVeriCode 
-            && form.confirmPasswd===form.passwd) {
+        if(correctHashedVeriCode=== hashedInputVeriCode
+            && (form.passwd && form.confirmPasswd && form.passwd.length >= 6)
+            && form.confirmPasswd===form.passwd
+            ) {
             //sign up is async
             let signup_success = await signUp({userName:form.email, passwd:form.passwd})
             if(signup_success) {
@@ -42,7 +44,7 @@ export const PageSignUp = (props) => {
                 });
             }
         }
-        else if (form.passwd === undefined || form.passwd===null || form.passwd.length<6)  {
+        else if (form.passwd === undefined || form.passwd===null || form.passwd.length < 6)  {
             alert("the length of password should be at least 6")
             updateForm({
                 passwd:"",
