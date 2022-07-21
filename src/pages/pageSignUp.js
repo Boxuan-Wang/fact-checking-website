@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavBar } from "../elements/navBar";
 import { signUp } from "../elements/apiCalls";
 import { sendVeriCode } from "../elements/apiCalls";
+import { createHash } from "node:crypto";
 import "./pageSignUp.css";
 
 export const PageSignUp = (props) => {
@@ -15,15 +16,16 @@ export const PageSignUp = (props) => {
     );
 
     //eslint-disable-next-line
-    const [correctVeriCode, setCorrectVeriCode] = useState("");
+    const [correctHashedVeriCode, setCorrectVeriCode] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
         // alert("submit");
         // alert(JSON.stringify(form));
         // alert("Correct veri: " + correctVeriCode);
-        
-        if(correctVeriCode===form.veriCode && form.confirmPasswd===form.passwd) {
+        const hashedInputVeriCode = createHash('sha256').update(form.veriCode).digest('hex');
+        if(correctHashedVeriCode=== hashedInputVeriCode 
+            && form.confirmPasswd===form.passwd) {
             //sign up is async
             let signup_success = await signUp({userName:form.email, passwd:form.passwd})
             if(signup_success) {
@@ -57,13 +59,13 @@ export const PageSignUp = (props) => {
             );
         }
 
-        else if(correctVeriCode!==form.veriCode){
+        else if(correctHashedVeriCode!==form.veriCode){
             alert("Wrong verification code!");
             updateForm({veriCode:""});
         }
 
         else {
-            alert("Unkown?");
+            alert("Unkown error");
         }
     };
 

@@ -81,7 +81,7 @@ export const signUp = async (userInfo) => {
  * Send a verification code to the given email.
  * Send .../sendCode
  * @param {string} emailAddress 
- * @return veriCode just sent
+ * @return hashed veriCode just sent
  */
 export const sendVeriCode = async (emailAddress) => {
   console.log("sending email");
