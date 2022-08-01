@@ -1,19 +1,47 @@
 div.form-element {
     display: block;
-    text-align: center;
 }
 form {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
     display: inline-block;
     text-align: left;
 }
 label {
-    font-size: 15px;
+    font-size: 35px;
+    width: auto;
+    text-align: left;
+    display: block;
 }
 
-input {
-    width: 250px;
-    height: 18px;
+input.signup-text {
+    width: 400px;
+    height: 40px;
+    font-size: 30px;
+    display: block;
+}
+.get-verification-code-button {
+    width: 200px;
+    height: 40px;
+    margin-top: 15px;
+
+    border-radius: 15px;
+    background-color: rgb(196, 241, 255);
+    display: block;
+}
+.get-verification-code-button:hover {
+    background-color: bisque;
+}
+
+.sign-up-button {
+    width: 300px;
+    height: 80px;
+    border-radius:15px;
+    margin-top: 45px;
+    margin-left: 15px;
+    background-color: rgb(196, 241, 255);
+}
+.sign-up-button:hover {
+    background-color: bisque;
 }

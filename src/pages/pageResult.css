@@ -1,0 +1,26 @@
+.result_title {
+    font-size: 40px;
+    font-style: bold;
+    text-align: center;
+    width: 65%;
+}
+
+.human_result_list {
+    margin: 20px 30px;
+    width: 65%;
+}
+
+li.human_result {
+    width: auto;
+    height: auto;
+    border: 2px 0px;
+}
+li.human_result:hover {
+    background-color: azure;
+}
+
+ul {
+    list-style-type: none;
+    height: 400px;
+    overflow-y: scroll;
+}

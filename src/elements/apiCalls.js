@@ -16,11 +16,18 @@ const sever_url = "http://202.61.201.7:5000";
  * @returns an auto-checked result
  */
 export const checkClaim = async (claim) => {
-  const response = await fetch(sever_url + "/check", {
+  let result;
+  await fetch(sever_url + "/checkClaim", {
     method: "POST",
-    body: JSON.stringify(claim),
-  });
-  const result = await response.json();
+    body: JSON.stringify({query: claim}),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(res => res.json())
+  .then(data => result = data)
+  .catch(err => console.error(err));
+
   // console.log(result);
   return result;
 };
@@ -43,6 +50,7 @@ export const signIn = async (userInfo) => {
     headers: {
       "Content-Type": "application/json",
     },
+
   })
   .then(res => res.json())
   .then(data => sign_sucessful=data)

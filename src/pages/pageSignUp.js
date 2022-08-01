@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavBar } from "../elements/navBar";
 import { signUp } from "../elements/apiCalls";
 import { sendVeriCode } from "../elements/apiCalls";
-import { createHash } from "node:crypto";
+import crypto from "crypto-js";
 import "./pageSignUp.css";
 
 export const PageSignUp = (props) => {
@@ -20,10 +20,8 @@ export const PageSignUp = (props) => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        // alert("submit");
-        // alert(JSON.stringify(form));
-        // alert("Correct veri: " + correctVeriCode);
-        const hashedInputVeriCode = createHash('sha256').update(form.veriCode).digest('hex');
+
+        const hashedInputVeriCode = crypto.SHA256(form.veriCode).toString();
         if(correctHashedVeriCode=== hashedInputVeriCode
             && (form.passwd && form.confirmPasswd && form.passwd.length >= 6)
             && form.confirmPasswd===form.passwd
@@ -36,7 +34,7 @@ export const PageSignUp = (props) => {
             }
             else {
                 alert("Email cannot be used! Sign up failed!");
-                form.updateForm({
+                updateForm({
                     email:"",
                     passwd:"",
                     confirmPasswd:"",
@@ -88,6 +86,7 @@ export const PageSignUp = (props) => {
                 type="email" 
                 name="email"
                 id="email-id"
+                className="signup-text"
                 value={form.email} 
                 onChange={e => updateForm({
                     email: e.target.value,
@@ -102,6 +101,7 @@ export const PageSignUp = (props) => {
                 type="password" 
                 name="password"
                 id="password-id"
+                className="signup-text"
                 value={form.passwd} 
                 onChange={e => updateForm({
                     email: form.email,
@@ -117,6 +117,7 @@ export const PageSignUp = (props) => {
                 type="password" 
                 name="confirm password"
                 id="cinfirm-password-id"
+                className="signup-text"
                 value={form.confirmPasswd} 
                 onChange={e => updateForm({
                     email: form.email,
@@ -132,6 +133,7 @@ export const PageSignUp = (props) => {
                 type="txt" 
                 name="Verify email"
                 id="verification-id"
+                className="signup-text"
                 value={form.veriCode} 
                 onChange={e => updateForm({
                     email: form.email,
@@ -149,7 +151,7 @@ export const PageSignUp = (props) => {
                 <input 
                     type="submit" 
                     value="Sign Up" 
-                    className="Sign-up-button"/>
+                    className="sign-up-button"/>
             </div>
                 
             </form>

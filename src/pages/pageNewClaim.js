@@ -1,21 +1,26 @@
 import { useState } from "react";
 import { NavBar } from "../elements/navBar";
 import React from "react";
-
+import { checkClaim } from "../elements/apiCalls";
+import "./pageNewClaim.css";
 
 /**
  * On receiving a claim to check, call both API to get two results.
  * @param {a string claim to check} inputClaim 
  * @returns Both auto-check result and human check result.
+ * Human result: {claim_id, claim_org, claim_text, 
+ *   claim_url, publication, publication_date, text}
  */
-function searchResult(inputClaim) {
-    //TODO: call API
+async function searchResult(inputClaim) {
+    const result = await checkClaim(inputClaim);
     return ({
         claim: inputClaim,
-        autoResult:"autoResult",
-        humanResult:"humanResult"
+        fever_result: result.fever_result,
+        human_result: result.human_result
     });
 }
+
+
 
 /**
  * The page where logged users can make a new claim.
@@ -23,14 +28,27 @@ function searchResult(inputClaim) {
  */
 export const PageNewClaim = (props) => {
     const [inputClaim,setInputClaim] = useState("");
+    
+    async function handleSubmit (e){
+        e.preventDefault();
+
+        const checkResult = await searchResult(inputClaim);
+        props.onResultChange(checkResult);
+        
+    }
+
     return (
         <><NavBar 
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
-        <form>
-            <input type="txt" value={inputClaim} onChange={e => setInputClaim(e.target.value)} />
-            <button onClick={() => props.onResultChange(searchResult(inputClaim))}>Make the Claim!</button>
-        </form></>
+        <div className="newClaim-box">
+            <form onSubmit={handleSubmit}>
+                <input type="txt" className="new-claim-text" value={inputClaim} onChange={e => setInputClaim(e.target.value)} />
+                {/* <button onClick={async () => props.onResultChange(await searchResult(inputClaim))}>Make the Claim!</button> */}
+                <input className="submit-button" type="submit" value="Make the Claim!"/>
+            </form>
+        </div>
+        </>
     );
 };

@@ -1,0 +1,17 @@
+a.short_human_result {
+    text-decoration: none;
+}
+
+.short_claim_text {
+    font-size: 20px;
+    color: black;
+}
+.short_claim_org {
+    font-size: 10px;
+    font-weight: 50;
+    color: black;
+}
+.short_claim_date {
+    color: gray;
+    font-size: 10px;
+}
