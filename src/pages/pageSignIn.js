@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavBar } from "../elements/navBar";
 import { signIn } from "../elements/apiCalls";
-
+import "./pageSignIn.css";
 
 /**
  * Page where users sign in.
@@ -39,24 +39,26 @@ export const PageSignIn = (props) => {
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
-        <form onSubmit={handleSubmit}>
+        <form className="signInForm" onSubmit={handleSubmit}>
         <div>
-            <label htmlFor="userName-id" className="label-userName">User Name</label>
+            <label htmlFor="userName-id" className="label-signIn">User Name</label>
             <input 
-                type="txt" 
+                type={"email"} 
                 value={form.userName}
                 id="userName-id"
+                className="signInInput"
                 onChange={e => updateForm({
                     userName: e.target.value,
                     passwd: form.passwd
                 })} />
         </div>
         <div>
-            <label htmlFor="password-id" className="label-password">Password</label>
+            <label htmlFor="password-id" className="label-singIn">Password</label>
             <input 
                 type="password" 
                 value={form.passwd}
                 id="password-id"
+                className="signInInput"
                 onChange={e => updateForm({
                     userName:form.userName,
                     passwd:e.target.value

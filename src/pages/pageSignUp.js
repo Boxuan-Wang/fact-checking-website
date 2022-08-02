@@ -79,7 +79,7 @@ export const PageSignUp = (props) => {
         onLogInChange={props.onLogInChange} />
 
         <div className="form-element">
-            <form onSubmit={handleSubmit}>
+            <form className="signUpForm" onSubmit={handleSubmit}>
             <div className="form-item">
                 <label htmlFor="email-id" className="label-email">Email</label>
                 <input 

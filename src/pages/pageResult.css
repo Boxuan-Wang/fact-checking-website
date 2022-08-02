@@ -19,7 +19,7 @@ li.human_result:hover {
     background-color: azure;
 }
 
-ul {
+ul.humanCheckList {
     list-style-type: none;
     height: 400px;
     overflow-y: scroll;

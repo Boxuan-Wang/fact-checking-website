@@ -1,0 +1,21 @@
+form.signInForm {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+    display: block;
+    text-align: left;
+}
+
+label.label-signIn {
+    width: 100px;
+    text-align: left;
+    display: block;
+
+}
+
+input.signInInput {
+    width: 400px;
+    height: 40px;
+    font-size: 30px;
+    display: block;
+}

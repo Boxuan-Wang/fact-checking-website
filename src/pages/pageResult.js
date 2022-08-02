@@ -23,7 +23,7 @@ export const PageResult = (props) => {
             onLogInChange={props.onLogInChange} />
         <div className="result_title">{"Claim:  " + props.resultToShow.claim}</div>
         <div className="human_result_list">
-            <ul>{human_result_list_item}</ul>
+            <ul className="humanCheckList">{human_result_list_item}</ul>
         </div>
         </>
     );

@@ -32,8 +32,15 @@ export const PageNewClaim = (props) => {
     async function handleSubmit (e){
         e.preventDefault();
 
-        const checkResult = await searchResult(inputClaim);
-        props.onResultChange(checkResult);
+        if(props.logInStats.log) {
+           const checkResult = await searchResult(inputClaim);
+            props.onResultChange(checkResult);
+        }
+        else {
+            alert("Please sign in first.");
+            props.onPageChange("signIn");
+        }
+        
         
     }
 
@@ -43,9 +50,11 @@ export const PageNewClaim = (props) => {
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
         <div className="newClaim-box">
-            <form onSubmit={handleSubmit}>
-                <input type="txt" className="new-claim-text" value={inputClaim} onChange={e => setInputClaim(e.target.value)} />
-                {/* <button onClick={async () => props.onResultChange(await searchResult(inputClaim))}>Make the Claim!</button> */}
+            <form className="newClaimForm" onSubmit={handleSubmit}>
+                <textarea 
+                    value={inputClaim} 
+                    onChange = {e => setInputClaim(e.target.value)}
+                    className="new-claim-text"/> 
                 <input className="submit-button" type="submit" value="Make the Claim!"/>
             </form>
         </div>
