@@ -53,7 +53,7 @@ export const PageSignIn = (props) => {
                 })} />
         </div>
         <div>
-            <label htmlFor="password-id" className="label-singIn">Password</label>
+            <label htmlFor="password-id" className="label-signIn">Password</label>
             <input 
                 type="password" 
                 value={form.passwd}

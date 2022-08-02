@@ -1,5 +1,6 @@
 div.form-element {
     display: block;
+    text-align: center;
 }
 form.signUpForm {
     margin-left: 15%;
@@ -9,38 +10,49 @@ form.signUpForm {
     text-align: left;
 }
 label.label-signup {
+    margin-left: 20%;
     width: auto;
     text-align: left;
     display: block;
 }
 
 input.signup-text {
-    width: 400px;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
     height: 40px;
-    font-size: 30px;
+    font-size: 22px;
     display: block;
 }
+
+input.signup-vericode {
+    width: 30%;
+    margin-left: 20%;
+    height: 40px;
+    font-size: 22px;
+    display: inline;
+}
+
 .get-verification-code-button {
     width: 200px;
     height: 40px;
-    margin-top: 15px;
-
+    margin-left: 5%;
     border-radius: 15px;
-    background-color: rgb(196, 241, 255);
-    display: block;
+    background-color: #889BDE;
+    display: inline-block;
 }
 .get-verification-code-button:hover {
     background-color: bisque;
 }
 
 .sign-up-button {
-    width: 300px;
+    width: 30%;
     height: 80px;
     border-radius:15px;
     margin-top: 45px;
-    margin-left: 15px;
-    background-color: rgb(196, 241, 255);
+    margin-left: 30%;
+    background-color: #889BDE;
 }
 .sign-up-button:hover {
-    background-color: bisque;
+    background-color: #606d9e;
 }

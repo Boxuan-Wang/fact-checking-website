@@ -3,11 +3,12 @@ form.signInForm {
     margin-right: 15%;
     margin-top: 10%;
     display: block;
-    text-align: left;
+    text-align: center;
 }
 
 label.label-signIn {
-    width: 100px;
+    font-size: 30px;
+    width: auto;
     text-align: left;
     display: block;
 
@@ -18,4 +19,17 @@ input.signInInput {
     height: 40px;
     font-size: 30px;
     display: block;
+}
+
+input.sign-in-button {
+    width: 300px;
+    height: 80px;
+    border-radius: 15px;
+    margin-top: 45px;
+    background-color: #889BDE;
+}
+
+input.sign-in-button:hover {
+    background-color: #606d9e;
+    color: white;
 }

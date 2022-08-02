@@ -81,7 +81,7 @@ export const PageSignUp = (props) => {
         <div className="form-element">
             <form className="signUpForm" onSubmit={handleSubmit}>
             <div className="form-item">
-                <label htmlFor="email-id" className="label-email">Email</label>
+                <label htmlFor="email-id" className="label-signup">Email</label>
                 <input 
                 type="email" 
                 name="email"
@@ -96,7 +96,7 @@ export const PageSignUp = (props) => {
                 })} />
             </div>
             <div className="form-item">
-                <label htmlFor="password-id" className="label-password">Password</label>
+                <label htmlFor="password-id" className="label-signup">Password</label>
                 <input 
                 type="password" 
                 name="password"
@@ -112,7 +112,7 @@ export const PageSignUp = (props) => {
             </div>
                 
             <div className="form-item">
-                <label htmlFor="confirm-password-id" className="label-confirm-password">Confirm Password</label>
+                <label htmlFor="confirm-password-id" className="label-signup">Confirm Password</label>
                 <input 
                 type="password" 
                 name="confirm password"
@@ -128,12 +128,12 @@ export const PageSignUp = (props) => {
             </div>
                 
             <div className="form-item">
-                <label htmlFor="verification-id" className="label-verification">Verify Email</label>
+                <label htmlFor="verification-id" className="label-signup">Verify Email</label>
                 <input 
                 type="txt" 
                 name="Verify email"
                 id="verification-id"
-                className="signup-text"
+                className="signup-vericode"
                 value={form.veriCode} 
                 onChange={e => updateForm({
                     email: form.email,
