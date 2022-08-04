@@ -24,3 +24,8 @@ ul.humanCheckList {
     height: 400px;
     overflow-y: scroll;
 }
+
+.noHumanResultText {
+    font-size: 45px;
+    font-weight: bolder;
+}

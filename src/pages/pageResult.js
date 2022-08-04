@@ -10,10 +10,13 @@ import "../pages/pageResult.css";
 export const PageResult = (props) => {
     const human_result_list_item = props.resultToShow.human_result.map(
         (result) => 
-        <li className="human_result">
+        <li className="human_result" key={result.claim_url}>
             <ResultPresent format="short_human_result" result={result}/>
         </li>
     );
+    const human_result = props.resultToShow.human_result.length > 0?
+        <ul className="humanCheckList">{human_result_list_item}</ul>:
+        <p className="noHumanResultText">No human-check result found</p>;
 
     return (
         <>
@@ -23,7 +26,7 @@ export const PageResult = (props) => {
             onLogInChange={props.onLogInChange} />
         <div className="result_title">{"Claim:  " + props.resultToShow.claim}</div>
         <div className="human_result_list">
-            <ul className="humanCheckList">{human_result_list_item}</ul>
+            {human_result}
         </div>
         </>
     );
