@@ -1,0 +1,19 @@
+.unclickedSendVeriButton {
+    width: 200px;
+    height: 40px;
+    margin-left: 5%;
+    border-radius: 15px;
+    background-color: #889BDE;
+    display: inline-block;
+}
+.unclickedSendVeriButton:hover {
+    background-color: bisque;
+}
+
+.clickedSendVeriButton {
+    width: 200px;
+    height: 40px;
+    margin-left: 5%;
+    border-radius: 15px;
+    display: inline-block;
+}

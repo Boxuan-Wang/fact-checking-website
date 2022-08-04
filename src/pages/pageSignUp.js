@@ -4,6 +4,7 @@ import { signUp } from "../elements/apiCalls";
 import { sendVeriCode } from "../elements/apiCalls";
 import crypto from "crypto-js";
 import "./pageSignUp.css";
+import { VeriCodeButton } from "../elements/veriCodeButton";
 
 export const PageSignUp = (props) => {
     const [form, updateForm] = useState(
@@ -30,6 +31,7 @@ export const PageSignUp = (props) => {
             let signup_success = await signUp({userName:form.email, passwd:form.passwd})
             if(signup_success) {
                 alert("signed up successfully!");
+                //todo: jump to sign in
                 return;
             }
             else {
@@ -59,7 +61,10 @@ export const PageSignUp = (props) => {
             );
         }
 
-        else if(correctHashedVeriCode!==form.veriCode){
+        else if(form.veriCode === null ||
+            form.veriCode ===undefined ||
+            !correctHashedVeriCode ||
+            correctHashedVeriCode!==form.veriCode){
             alert("Wrong verification code!");
             updateForm({veriCode:""});
         }
@@ -142,10 +147,11 @@ export const PageSignUp = (props) => {
                     veriCode: e.target.value
                 })} />
         
-                <input type="button" 
+                {/* <input type="button" 
                     value="Get Code" 
                     onClick={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} 
-                    className="get-verification-code-button" />
+                    className="get-verification-code-button" /> */}
+                <VeriCodeButton click={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} />
             </div>
             <div className="form-item">
                 <input 
