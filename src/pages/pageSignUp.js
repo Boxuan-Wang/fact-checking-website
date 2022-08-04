@@ -5,6 +5,7 @@ import { sendVeriCode } from "../elements/apiCalls";
 import crypto from "crypto-js";
 import "./pageSignUp.css";
 import { VeriCodeButton } from "../elements/veriCodeButton";
+import { useTimer } from "react-timer-hook";
 
 export const PageSignUp = (props) => {
     const [form, updateForm] = useState(
@@ -16,8 +17,14 @@ export const PageSignUp = (props) => {
         }
     );
 
-    //eslint-disable-next-line
     const [correctHashedVeriCode, setCorrectVeriCode] = useState("");
+    const {restart} = 
+        useTimer(
+            {
+                expiryTimestamp: new Date(), 
+                onExpire: () => setCorrectVeriCode("")
+            }
+        );
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -55,6 +62,7 @@ export const PageSignUp = (props) => {
         else if(form.confirmPasswd!==form.passwd) {
             alert("Different password input");
             updateForm({
+                
                 passwd:"",
                 confirmPasswd:"",
                 veriCode:""}
@@ -151,7 +159,9 @@ export const PageSignUp = (props) => {
                     value="Get Code" 
                     onClick={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} 
                     className="get-verification-code-button" /> */}
-                <VeriCodeButton click={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} />
+                <VeriCodeButton 
+                    click={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} 
+                    startExpireTimer={restart}/>
             </div>
             <div className="form-item">
                 <input 

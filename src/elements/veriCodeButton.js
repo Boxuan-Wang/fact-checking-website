@@ -18,9 +18,15 @@ export const VeriCodeButton = (props) => {
             }
         );
     async function clickGetCode() {
+        //store the return value into the hook
         await props.click();
+        //start the expire timer
+        let expireTime = new Date();
+        expireTime.setMinutes(expireTime.getMinutes() + 10);
+        props.startExpireTimer(expireTime)
+        //wait for two minutes, button becomes invalid
         const time = new Date();
-        //wait for two minutes
+        
         time.setSeconds(time.getSeconds() + 120);
         setClickState(true);
         restart(time);
@@ -31,14 +37,14 @@ export const VeriCodeButton = (props) => {
             type="button" 
             value="Get code"
             onClick={clickGetCode}
-            className="unclickedSendVeriButton"/>
+            className="unclickedSendVeriButton"/>;
     }
     else {
         ret = <input
             type="button" 
             value={`resend in ${seconds + 60 * minutes}s`}
             disabled={true}
-            className="clickedSendVeriButton"/>
+            className="clickedSendVeriButton"/>;
     }
     return ret;
 };
