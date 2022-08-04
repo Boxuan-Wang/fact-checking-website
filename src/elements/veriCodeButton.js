@@ -19,17 +19,20 @@ export const VeriCodeButton = (props) => {
         );
     async function clickGetCode() {
         //store the return value into the hook
-        await props.click();
-        //start the expire timer
-        let expireTime = new Date();
-        expireTime.setMinutes(expireTime.getMinutes() + 10);
-        props.startExpireTimer(expireTime)
-        //wait for two minutes, button becomes invalid
-        const time = new Date();
+        const success = await props.click();
+        if(success) {
+            //start the expire timer
+            let expireTime = new Date();
+            expireTime.setMinutes(expireTime.getMinutes() + 10);
+            props.startExpireTimer(expireTime)
+            //wait for two minutes, button becomes invalid
+            const time = new Date();
+            
+            time.setSeconds(time.getSeconds() + 120);
+            setClickState(true);
+            restart(time);
+        }
         
-        time.setSeconds(time.getSeconds() + 120);
-        setClickState(true);
-        restart(time);
 
     }
     if(!clickedState) {

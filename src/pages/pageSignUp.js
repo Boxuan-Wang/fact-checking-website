@@ -7,6 +7,8 @@ import "./pageSignUp.css";
 import { VeriCodeButton } from "../elements/veriCodeButton";
 import { useTimer } from "react-timer-hook";
 
+const USED_EMAIL_SIGN = "USED_EMAIL";
+
 export const PageSignUp = (props) => {
     const [form, updateForm] = useState(
         {
@@ -25,6 +27,24 @@ export const PageSignUp = (props) => {
                 onExpire: () => setCorrectVeriCode("")
             }
         );
+    
+    async function handleVeriCodeButton() {
+        const returnedHashCode = await sendVeriCode(form.email);
+        if(returnedHashCode===USED_EMAIL_SIGN) {
+            alert("Email cannot be used! Sign up failed!");
+                updateForm({
+                    email:"",
+                    passwd:"",
+                    confirmPasswd:"",
+                    veriCode:""
+                });
+            return false;
+        }
+        else {
+            setCorrectVeriCode(returnedHashCode);
+            return true;
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -160,7 +180,7 @@ export const PageSignUp = (props) => {
                     onClick={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} 
                     className="get-verification-code-button" /> */}
                 <VeriCodeButton 
-                    click={async () =>setCorrectVeriCode(await sendVeriCode(form.email))} 
+                    click={handleVeriCodeButton}
                     startExpireTimer={restart}/>
             </div>
             <div className="form-item">
