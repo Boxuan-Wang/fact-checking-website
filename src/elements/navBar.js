@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../logo.svg';
+import logo from '../images/averitect-logo-black.png';
 import "./navBar.css";
 
 /**
@@ -12,7 +12,7 @@ export const NavBar = (props) => {
     if (props.logInStats.log===false) {
       return (
         <div className='nav'>
-          <img src={logo} className="app-logo" alt='logo' onClick={() => props.onPageChange("main")}/>
+          <img src={logo} className="app-logo-nav" alt='logo' onClick={() => props.onPageChange("main")}/>
           <button className='page' onClick={() => props.onPageChange("checked")}>Checked</button>
           <button className='page' onClick={() => props.onPageChange("newClaim")}>New Claim</button>
           <button className='page' onClick={() => props.onPageChange("aboutUs")}>About Us</button>
@@ -23,7 +23,7 @@ export const NavBar = (props) => {
     } else {
       return (
         <div className='nav'>
-          <img src={logo} className='app-logo' alt='logo' />
+          <img src={logo} className='app-logo-nav' alt='logo' />
           <button className='page' onClick={() => props.onPageChange("checked")}>Checked</button>
           <button className='page' onClick={() => props.onPageChange("newClaim")}>New Claim</button>
           <button className='page' onClick={() => props.onPageChange("aboutUs")}>About Us</button>
