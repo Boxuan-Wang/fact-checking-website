@@ -3,6 +3,7 @@ import { NavBar } from "../elements/navBar";
 import React from "react";
 import { checkClaim } from "../elements/apiCalls";
 import "./pageNewClaim.css";
+import Popup from "reactjs-popup";
 
 /**
  * On receiving a claim to check, call both API to get two results.
@@ -28,6 +29,14 @@ async function searchResult(inputClaim) {
  */
 export const PageNewClaim = (props) => {
     const [inputClaim,setInputClaim] = useState("");
+    const [popOpen, setPopOpen] = useState(false);
+    const [popString, setPopString] = useState("");
+    const closePop = 
+        () => {
+            setPopOpen(false);
+            setPopString("");
+            props.onPageChange("signIn");
+        };
     
     async function handleSubmit (e){
         e.preventDefault();
@@ -37,8 +46,9 @@ export const PageNewClaim = (props) => {
             props.onResultChange(checkResult);
         }
         else {
-            alert("Please sign in first.");
-            props.onPageChange("signIn");
+            // alert("Please sign in first.");
+            setPopString("Please sign in first.");
+            setPopOpen(true);
         }
         
         
@@ -49,6 +59,11 @@ export const PageNewClaim = (props) => {
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
+        <Popup open={popOpen} closeOnDocumentClick onClose={closePop} className="infoPop">
+            <div>
+                {popString}
+            </div>
+        </Popup>
         <div className="newClaim-box">
             <form className="newClaimForm" onSubmit={handleSubmit}>
                 <textarea 

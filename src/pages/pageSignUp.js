@@ -62,7 +62,7 @@ export const PageSignUp = (props) => {
         e.preventDefault();
 
         const hashedInputVeriCode = crypto.SHA256(form.veriCode).toString();
-        if(form.email 
+        if(form.email && form.email !=="" 
             && correctHashedVeriCode=== hashedInputVeriCode
             && (form.passwd && form.confirmPasswd && form.passwd.length >= 6)
             && form.confirmPasswd===form.passwd
@@ -125,7 +125,7 @@ export const PageSignUp = (props) => {
     };
 
     return (
-        /* TODO: Try to add a timer to the get code button */
+        //todo: disable signup button until get hashed vericode
         <>
 
         <NavBar 
@@ -138,7 +138,7 @@ export const PageSignUp = (props) => {
                 {pop_string}
             </div>
         </Popup>
-        <div className="form-element">
+        <div className="singup-form-element">
             <form className="signUpForm" onSubmit={handleSubmit}>
             <div className="form-item">
                 <label htmlFor="email-id" className="label-signup">Email</label>
@@ -212,6 +212,7 @@ export const PageSignUp = (props) => {
             </div>
             <div className="form-item">
                 <input 
+                    disabled={!correctHashedVeriCode || correctHashedVeriCode==="" || correctHashedVeriCode=== USED_EMAIL_SIGN}
                     type="submit" 
                     value="Sign Up" 
                     className="sign-up-button"/>

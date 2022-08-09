@@ -1,4 +1,4 @@
-div.form-element {
+div.signup-form-element {
     display: block;
     text-align: center;
 }
@@ -53,23 +53,6 @@ input.signup-vericode {
     margin-left: 30%;
     background-color: #889BDE;
 }
-.sign-up-button:hover {
-    background-color: #606d9e;
-}
-
-.infoPop-content {
-    margin: auto;
-    background-color: black;
-    color: white;
-    width: 50%;
-    max-height: 25%;
-    padding: 5px;
-    font-size: 25px;
-    text-align: center;
-}
-.infoPop-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.infoPop-arrow {
-    color: rgb(255, 255, 255);
+[disable=false].sign-up-button:hover {
+    background-color: bisque;
 }
