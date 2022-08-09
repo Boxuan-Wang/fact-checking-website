@@ -6,6 +6,7 @@ import crypto from "crypto-js";
 import "./pageSignUp.css";
 import { VeriCodeButton } from "../elements/veriCodeButton";
 import { useTimer } from "react-timer-hook";
+import Popup from "reactjs-popup";
 
 const USED_EMAIL_SIGN = "USED_EMAIL";
 
@@ -18,6 +19,9 @@ export const PageSignUp = (props) => {
             veriCode:""
         }
     );
+    const [popup_open, set_open] = useState(false);
+    const [pop_string, set_pop_string] = useState("");
+    const closePopUp = ()=>{set_open(false); set_pop_string("")};
 
     const [correctHashedVeriCode, setCorrectVeriCode] = useState("");
     const {restart} = 
@@ -29,9 +33,17 @@ export const PageSignUp = (props) => {
         );
     
     async function handleVeriCodeButton() {
+        if(!form.email) {
+            set_pop_string("Please enter email.");
+            set_open(true);
+            return false;
+        }
         const returnedHashCode = await sendVeriCode(form.email);
         if(returnedHashCode===USED_EMAIL_SIGN) {
-            alert("Email cannot be used! Sign up failed!");
+            // alert("Email cannot be used! Sign up failed!");
+            //show a pop window to present information
+            set_pop_string("Email has been used. Please use another email.");
+            set_open(true);
                 updateForm({
                     email:"",
                     passwd:"",
@@ -50,19 +62,22 @@ export const PageSignUp = (props) => {
         e.preventDefault();
 
         const hashedInputVeriCode = crypto.SHA256(form.veriCode).toString();
-        if(correctHashedVeriCode=== hashedInputVeriCode
+        if(form.email 
+            && correctHashedVeriCode=== hashedInputVeriCode
             && (form.passwd && form.confirmPasswd && form.passwd.length >= 6)
             && form.confirmPasswd===form.passwd
             ) {
             //sign up is async
             let signup_success = await signUp({userName:form.email, passwd:form.passwd})
             if(signup_success) {
-                alert("signed up successfully!");
-                //todo: jump to sign in
+                set_pop_string("Signed up successfully!");
+                set_open(true);
+                props.onPageChange("signIn");
                 return;
             }
             else {
-                alert("Email cannot be used! Sign up failed!");
+                set_pop_string("Email cannot be used! Sign up failed!");
+                set_open(true);
                 updateForm({
                     email:"",
                     passwd:"",
@@ -71,8 +86,13 @@ export const PageSignUp = (props) => {
                 });
             }
         }
+        else if (!form.email) {
+            set_pop_string("Please enter your email.");
+            set_open(true);
+        }
         else if (form.passwd === undefined || form.passwd===null || form.passwd.length < 6)  {
-            alert("the length of password should be at least 6")
+            set_pop_string("the length of password should be at least 6");
+            set_open(true);
             updateForm({
                 passwd:"",
                 confirmPasswd:"",
@@ -80,7 +100,8 @@ export const PageSignUp = (props) => {
             );
         }
         else if(form.confirmPasswd!==form.passwd) {
-            alert("Different password input");
+            set_pop_string("Different password input");
+            set_open(true);
             updateForm({
                 
                 passwd:"",
@@ -93,7 +114,8 @@ export const PageSignUp = (props) => {
             form.veriCode ===undefined ||
             !correctHashedVeriCode ||
             correctHashedVeriCode!==form.veriCode){
-            alert("Wrong verification code!");
+            set_pop_string("Wrong verification code!");
+            set_open(true);
             updateForm({veriCode:""});
         }
 
@@ -111,6 +133,11 @@ export const PageSignUp = (props) => {
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
 
+        <Popup open={popup_open} closeOnDocumentClick onClose={closePopUp} className="infoPop">
+            <div>
+                {pop_string}
+            </div>
+        </Popup>
         <div className="form-element">
             <form className="signUpForm" onSubmit={handleSubmit}>
             <div className="form-item">
