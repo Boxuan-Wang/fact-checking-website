@@ -12,14 +12,18 @@ const sever_url = "http://202.61.201.7:5000";
 
 /**
  * API call for auto-checking AI. Send .../check with PUT
- * @param {a string - claim to check} claim 
+ * @param claim string -- claim to check
+ * @param userName string -- user email
  * @returns an auto-checked result
  */
-export const checkClaim = async (claim) => {
+export const checkClaim = async (claim, userName) => {
   let result;
   await fetch(sever_url + "/checkClaim", {
     method: "POST",
-    body: JSON.stringify({query: claim}),
+    body: JSON.stringify({
+      query: claim,
+      userName: userName
+    }),
     headers: {
       "Content-Type": "application/json",
     },
