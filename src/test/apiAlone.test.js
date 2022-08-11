@@ -1,7 +1,23 @@
 import React from 'react';
 import {act} from 'react-dom/test-utils';
-import { getPopular, checkClaim, signIn, signUp, sendVeriCode } from '../elements/apiCalls';
+import { getPopular, checkClaim, signIn, signUp, sendVeriCode, getHistory } from '../elements/apiCalls';
 
+test('test getHistory API function', async () => {
+    let container;
+    const fakeHistoryList = {history: [
+        {claim: "History1", date: 123456789},
+        {claim: "History2", date: 123456789},
+    ]};
+
+    jest.spyOn(global, 'fetch').mockImplementation(() => 
+    Promise.resolve({
+        json: () => Promise.resolve(fakeHistoryList)
+    }));
+
+    await act(async () => container = await getHistory("user"));
+    expect(container[0].claim).toBe("History1");
+    expect(container[0].date).toBe(123456789);
+});
 
 test('test getPopular API function', async () => {
     let container;

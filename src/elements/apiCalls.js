@@ -1,4 +1,27 @@
 const sever_url = "http://202.61.201.7:5000";
+
+/**
+ * API call for get the checking history of a user
+ * @param  userName string -- user email
+ * @returns HistoryEntry array {claim:string, date: number}
+ */
+export const getHistory = async (userName) => {
+  let ret = [];
+   await fetch(sever_url + "/history", {
+    method:"POST",
+    body: JSON.stringify({
+      userName: userName
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(res => res.json())
+  .then(data => ret = data.history)
+  .catch(err => console.error(err));
+
+  return ret;
+};
 /**
  * API call for finding popular checked claims. Send .../popular
  * @returns A list that contains some popular results

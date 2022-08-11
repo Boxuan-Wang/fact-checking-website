@@ -13,8 +13,8 @@ import Popup from "reactjs-popup";
  * Human result: {claim_id, claim_org, claim_text, 
  *   claim_url, publication, publication_date, text}
  */
-async function searchResult(inputClaim, userName) {
-    const result = await checkClaim(inputClaim);
+export async function searchResult(inputClaim, userName) {
+    const result = await checkClaim(inputClaim,userName);
     return ({
         claim: inputClaim,
         fever_result: result.fever_result,

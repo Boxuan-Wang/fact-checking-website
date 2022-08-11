@@ -1,5 +1,6 @@
 import React from 'react';
 import "./resultPresent.css";
+import { searchResult } from "../pages/pageNewClaim";
 
 export const ResultPresent = (props) => {
   let ret;
@@ -9,6 +10,20 @@ export const ResultPresent = (props) => {
 
       ret = <><div className="shortPreClaim">{props.result.claim}</div></>;
 
+    }
+    else if(props.format === 'history') {
+      const date = new Date(props.result.date);
+      const checkAgain = async () => {
+        const result = await searchResult(props.result.claim, props.userName);
+        props.onResultChange(result);
+        props.onPageChange("result");
+      };
+      ret = 
+      <>
+        <div className='historyClaimText'>{props.result.claim}</div>
+        <div className='historyClaimDate'>{date.toUTCString()}</div>
+        <button className='historyClaimCheckButton' onClick={checkAgain}>Check again</button>
+      </>
     }
     else if (props.format === 'short_human_result') {
       //format used to show human result in short

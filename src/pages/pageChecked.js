@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavBar } from "../elements/navBar";
-import { getPopular } from "../elements/apiCalls";
+import { getHistory } from "../elements/apiCalls";
 import { ResultPresent } from "../elements/resultPresent";
 
 
@@ -11,17 +11,23 @@ import { ResultPresent } from "../elements/resultPresent";
  */
 export const PageChecked =  (props) => {
     
-    const [popularClaims, setPopularClaims] = useState(null);
+    const [historyClaims, setHistoryClaims] = useState(null);
 
     useEffect(() => {
         async function fetch() {
-            const res = await getPopular();
-            setPopularClaims(res);
+            const res = await getHistory(props.logInStats.userName);
+            setHistoryClaims(res);
         }
-        fetch();        
+        if(props.logInStats.log) {
+            fetch();
+        }
+        else {
+            setHistoryClaims([]);
+        }
+                
     });
 
-    if(!popularClaims) {
+    if(!historyClaims) {
         console.log("waiting\n");
         return "loading...";
     }
@@ -34,9 +40,13 @@ export const PageChecked =  (props) => {
         onLogInChange={props.onLogInChange} />
         <div>
             <ul>
-                {popularClaims.map((result) =>
-                <li key={result.claim}>
-                    <ResultPresent format="short" result={result}/>
+                {historyClaims.map((result) =>
+                <li key={result.date}>
+                    <ResultPresent format="short" 
+                    result={result} 
+                    userName={props.logInStats.userName} 
+                    onResultChange={props.onResultChange} 
+                    onPageChange={props.onPageChange}/>
                 </li>)}
             </ul>
         </div>
