@@ -7,7 +7,7 @@ import Popup from "reactjs-popup";
 
 /**
  * On receiving a claim to check, call both API to get two results.
- * @param setInputClaim string -- claim to check
+ * @param claim string -- claim to check
  * @param userName string -- user's email
  * @returns Both auto-check result and human check result.
  * Human result: {claim_id, claim_org, claim_text, 
