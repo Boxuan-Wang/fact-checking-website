@@ -72,6 +72,7 @@ export const PageSignUp = (props) => {
             if(signup_success) {
                 set_pop_string("Signed up successfully!");
                 set_open(true);
+                //todo: wait for user to see the message
                 props.onPageChange("signIn");
                 return;
             }

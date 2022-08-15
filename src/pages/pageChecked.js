@@ -40,14 +40,17 @@ export const PageChecked =  (props) => {
         onLogInChange={props.onLogInChange} />
         <div>
             <ul>
-                {historyClaims.map((result) =>
+                {historyClaims.length ===0 ? 
+                <div>No history</div>:
+                historyClaims.map((result) =>
                 <li key={result.date}>
-                    <ResultPresent format="short" 
+                    <ResultPresent format="history" 
                     result={result} 
                     userName={props.logInStats.userName} 
                     onResultChange={props.onResultChange} 
                     onPageChange={props.onPageChange}/>
-                </li>)}
+                </li>)
+                }
             </ul>
         </div>
         </>
