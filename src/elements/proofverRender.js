@@ -42,6 +42,38 @@ export const extract = (resultText) => {
         operators:operatorList
     };
 }
-const renderProof = (claim, proof, operater) => {
-    return <div></div>;
-}
+
+const renderSingleLogic = (claimWord, evidenceWord, operator) => {
+    return (
+        <div className='singleLogic'>
+            <div> {claimWord}</div>
+            <div> {evidenceWord}</div>
+            <div> {operator} </div>
+        </div>
+    );
+};
+
+
+const renderFromElements = (claim, evidence, operator) => {
+    if(claim.length !== evidence.length || evidence.length !== operator.length) {
+        throw new Error("Proof format error: length not the same");
+    }
+
+    let ret = [];
+    const len = claim.length;
+    for(let i = 0; i < len; i++) {
+        ret.push(renderSingleLogic(claim[i],evidence[i],operator[i]));
+    }
+
+
+    return (
+        <div className='proofverResult'>
+            {ret}
+        </div>
+    );
+};
+
+export const renderProofString = (proof) => {
+    const elements = extract(proof);
+    return renderFromElements(elements.claim, elements.evidence, elements.operators);
+};

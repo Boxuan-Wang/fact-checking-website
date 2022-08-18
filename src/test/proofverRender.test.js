@@ -1,5 +1,6 @@
 import {act} from 'react-dom/test-utils';
-import { extract } from "../elements/proofverRender";
+import React from 'react';
+import { extract,renderProofString } from "../elements/proofverRender";
 
 test('test ProofVer normal', () => {
     let res;
@@ -21,5 +22,10 @@ test('test proofver extract with evidence only', () => {
     expect(res.evidence).toEqual(["evidence","evi"]);
 });
 
-
+// test('render proof test', () => {
+//     const input = "^ { claim } [ evidence ] = ";
+//     let res;
+//     act(() => res = renderProofString(input));
+//     expect(res).toBe(<div className="proofverResult"><div className="singleLogic"><div> claim</div><div> evidence</div><div> = </div></div></div>);
+// });
 
