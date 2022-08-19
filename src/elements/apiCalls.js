@@ -19,8 +19,6 @@ export const getHistory = async (userName) => {
   .then(res => res.json())
   .then(data => ret = data.history)
   .catch(err => console.error(err));
-  //todo: delete
-  console.log("getHistory: " + JSON.stringify(ret));
 
   return ret;
 };

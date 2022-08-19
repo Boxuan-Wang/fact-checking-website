@@ -1,6 +1,7 @@
 import React from 'react';
 import "./resultPresent.css";
 import { searchResult } from "../pages/pageNewClaim";
+import { RenderProofString } from "./proofverRender";
 
 export const ResultPresent = (props) => {
   let ret;
@@ -51,6 +52,14 @@ export const ResultPresent = (props) => {
           <div>{props.result.publication}</div>
         </div>
       </>
+    }
+    else if (props.format === "proofver_result"){
+      ret = 
+        <>
+          <div className='proofver_result'>
+            <RenderProofString proof={props.result}/>
+          </div>
+        </>
     }
     else throw new Error('Not a format for result representing.');
 

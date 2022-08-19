@@ -5,13 +5,20 @@
     width: 65%;
 }
 
+div.proofver_result {
+    float: left;
+    display: inline;
+    width: 40%;
+    margin: 15px 5% 0px 5%;
+}
 .human_result_list {
-    margin: 20px 30px;
-    width: 65%;
+    margin: 15px 5% 0px 5%;
+    width: 40%;
+    float: left;
 }
 
 li.human_result {
-    width: auto;
+    width: 100%;
     height: auto;
     border: 2px 0px;
 }
@@ -22,7 +29,9 @@ li.human_result:hover {
 ul.humanCheckList {
     list-style-type: none;
     height: 400px;
+    width: 100%;
     overflow-y: scroll;
+    display: block;
 }
 
 .noHumanResultText {

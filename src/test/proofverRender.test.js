@@ -1,6 +1,6 @@
 import {act} from 'react-dom/test-utils';
 import React from 'react';
-import { extract,renderProofString } from "../elements/proofverRender";
+import { extract,RenderProofString } from "../elements/proofverRender";
 
 test('test ProofVer normal', () => {
     let res;

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./proofver.css";
 /**
  * Extract claim words, evidence words and natural logic operators
  */
@@ -47,8 +47,8 @@ const renderSingleLogic = (claimWord, evidenceWord, operator) => {
     return (
         <div className='singleLogic'>
             <div> {claimWord}</div>
-            <div> {evidenceWord}</div>
             <div> {operator} </div>
+            <div> {evidenceWord}</div>
         </div>
     );
 };
@@ -60,6 +60,13 @@ const renderFromElements = (claim, evidence, operator) => {
     }
 
     let ret = [];
+    ret.push(
+        <div className='singleLogic'> 
+            <div>Claim</div>
+            <div>Relation</div>
+            <div>Evidence</div>
+        </div>
+        );
     const len = claim.length;
     for(let i = 0; i < len; i++) {
         ret.push(renderSingleLogic(claim[i],evidence[i],operator[i]));
@@ -73,7 +80,7 @@ const renderFromElements = (claim, evidence, operator) => {
     );
 };
 
-export const renderProofString = (proof) => {
-    const elements = extract(proof);
+export const RenderProofString = (props) => {
+    const elements = extract(props.proof);
     return renderFromElements(elements.claim, elements.evidence, elements.operators);
 };
