@@ -15,3 +15,9 @@ a.short_human_result {
     color: gray;
     font-size: 10px;
 }
+
+.noCheckingEngine {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+}

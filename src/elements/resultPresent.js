@@ -54,12 +54,21 @@ export const ResultPresent = (props) => {
       </>
     }
     else if (props.format === "proofver_result"){
-      ret = 
+      if(props.result) {
+        ret = 
         <>
           <div className='proofver_result'>
             <RenderProofString proof={props.result}/>
           </div>
         </>
+      }
+      else {
+        ret = <>
+          <div className='noCheckingEngine'>No checking engine connected</div>
+        </>
+      }
+
+      
     }
     else throw new Error('Not a format for result representing.');
 

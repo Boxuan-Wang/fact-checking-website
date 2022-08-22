@@ -61,7 +61,7 @@ const renderFromElements = (claim, evidence, operator) => {
 
     let ret = [];
     ret.push(
-        <div className='singleLogic'> 
+        <div className='proofverCol'> 
             <div>Claim</div>
             <div>Relation</div>
             <div>Evidence</div>
@@ -82,5 +82,6 @@ const renderFromElements = (claim, evidence, operator) => {
 
 export const RenderProofString = (props) => {
     const elements = extract(props.proof);
+    const verdict = props.verdict;
     return renderFromElements(elements.claim, elements.evidence, elements.operators);
 };
