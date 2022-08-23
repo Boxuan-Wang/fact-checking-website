@@ -25,7 +25,7 @@ export const PageChecked =  (props) => {
             setHistoryClaims([]);
         }
                 
-    });
+    },[]);
 
     if(!historyClaims) {
         console.log("waiting\n");

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./proofver.css";
 /**
  * Extract claim words, evidence words and natural logic operators
@@ -54,7 +54,7 @@ const renderSingleLogic = (claimWord, evidenceWord, operator) => {
 };
 
 
-const renderFromElements = (claim, evidence, operator) => {
+const renderFromProofElements = (claim, evidence, operator) => {
     if(claim.length !== evidence.length || evidence.length !== operator.length) {
         throw new Error("Proof format error: length not the same");
     }
@@ -73,15 +73,70 @@ const renderFromElements = (claim, evidence, operator) => {
     }
 
 
-    return (
-        <div className='proofverResult'>
-            {ret}
-        </div>
-    );
+    // return (
+    //     <>
+    //     <div className='proofVerVerdict'>{verdict}</div>
+    //     <div className='proofverResult'>
+    //         {ret}
+    //     </div></>
+    // );
+    return ret;
+};
+
+export const produceVerdictSeq = (operators) => {
+    //the verdicts: S, R, N (support, reject, NotAnInformation)
+    const transistMap = new Map();
+    transistMap.set('S#','S'); //what to do with #?
+    transistMap.set('S<','S');
+    transistMap.set('S=','S');
+    transistMap.set('S|','R');
+    transistMap.set('S!','R');
+    transistMap.set('S>','N');
+
+    transistMap.set('R=','R');
+    transistMap.set('R>','R');
+    transistMap.set('R!','S');
+    transistMap.set('R|','N');
+    transistMap.set('R<','N');
+    transistMap.set('R#','R');
+    
+    transistMap.set('N=','N');
+    transistMap.set('N<','N');
+    transistMap.set('N>','N');
+    transistMap.set('N|','N');
+    transistMap.set('N!','N');
+    transistMap.set('N#','N');
+
+    let state = 'S';
+    let retSeq = "";
+    for(let op of operators) {;
+        state = transistMap.get(state + op);
+        retSeq += state;
+    }
+    return retSeq;
 };
 
 export const RenderProofString = (props) => {
+    //used for displaying part of proof, for animation
+    const [step, setStep] = useState(1);
+
     const elements = extract(props.proof);
     const verdict = props.verdict;
-    return renderFromElements(elements.claim, elements.evidence, elements.operators);
+    const verdictSeq = produceVerdictSeq(elements.operators);
+    const proof = renderFromProofElements(elements.claim, elements.evidence, elements.operators);
+    const maxStage = proof.length;
+    const increaseStep = () => {setStep(step>=maxStage ? step: step + 1)};
+
+
+    //display only the 'step' number of elements
+    return (
+        <>
+        <div className='proofVerVerdict'>{verdict}</div>
+        <div className='proofverResult'>
+             {proof.subarray(0, step)}
+             {verdictSeq.subarray(0, step)}
+        </div>
+        <button onClick={increaseStep} disabled={step >= maxStage}> Next Step</button>
+    </>
+    )
 };

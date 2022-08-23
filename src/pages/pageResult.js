@@ -25,11 +25,9 @@ export const PageResult = (props) => {
             onPageChange={props.onPageChange}
             onLogInChange={props.onLogInChange} />
         <div className="result_title">{"Claim:  " + props.resultToShow.claim}</div>
-        {/* todo: remove hard code */}
         <div className="fever_result">
             <ResultPresent format="proofver_result" result = {props.resultToShow.fever_result.proof}/>
         </div>
-        
         <div className="human_result_list">
             {human_result}
         </div>
