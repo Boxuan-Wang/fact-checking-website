@@ -8,6 +8,7 @@ import "../pages/pageResult.css";
  * @returns The detail presentation of a result. 
  */
 export const PageResult = (props) => {
+    console.log('Result');
     const human_result_list_item = props.resultToShow.human_result.map(
         (result) => 
         <li className="human_result" key={result.claim_url}>

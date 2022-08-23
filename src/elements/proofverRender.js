@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./proofver.css";
+
 /**
  * Extract claim words, evidence words and natural logic operators
  */
@@ -43,44 +44,15 @@ export const extract = (resultText) => {
     };
 }
 
-const renderSingleLogic = (claimWord, evidenceWord, operator) => {
+const renderSingleLogic = (claimWord, evidenceWord, operator,verdict) => {
     return (
         <div className='singleLogic'>
             <div> {claimWord}</div>
             <div> {operator} </div>
             <div> {evidenceWord}</div>
+            <div>{verdict}</div>
         </div>
     );
-};
-
-
-const renderFromProofElements = (claim, evidence, operator) => {
-    if(claim.length !== evidence.length || evidence.length !== operator.length) {
-        throw new Error("Proof format error: length not the same");
-    }
-
-    let ret = [];
-    ret.push(
-        <div className='proofverCol'> 
-            <div>Claim</div>
-            <div>Relation</div>
-            <div>Evidence</div>
-        </div>
-        );
-    const len = claim.length;
-    for(let i = 0; i < len; i++) {
-        ret.push(renderSingleLogic(claim[i],evidence[i],operator[i]));
-    }
-
-
-    // return (
-    //     <>
-    //     <div className='proofVerVerdict'>{verdict}</div>
-    //     <div className='proofverResult'>
-    //         {ret}
-    //     </div></>
-    // );
-    return ret;
 };
 
 export const produceVerdictSeq = (operators) => {
@@ -116,6 +88,41 @@ export const produceVerdictSeq = (operators) => {
     return retSeq;
 };
 
+const detailVerdict = (v) => {
+    switch(v) {
+        case 'S': return "SUPPORT";
+        case 'R': return "REJECT";
+        case 'N': return "NOT INFORMATION";
+        default: throw new Error('Unknown verdict');
+
+    }
+};
+
+const renderFromProofElements = (claim, evidence, operator) => {
+    if(claim.length !== evidence.length || evidence.length !== operator.length) {
+        throw new Error("Proof format error: length not the same");
+    }
+
+    let ret = [];
+    ret.push(
+        <div className='proofverCol'> 
+            <div>Claim</div>
+            <div>Relation</div>
+            <div>Evidence</div>
+            <div>Verdict</div>
+        </div>
+        );
+    const len = claim.length;
+    const verdictSeq = produceVerdictSeq(operator);
+    for(let i = 0; i < len; i++) {
+        ret.push(renderSingleLogic(claim[i],evidence[i],operator[i],detailVerdict(verdictSeq[i])));
+    }
+
+    return ret;
+};
+
+
+
 export const RenderProofString = (props) => {
     //used for displaying part of proof, for animation
     const [step, setStep] = useState(1);
@@ -131,12 +138,11 @@ export const RenderProofString = (props) => {
     //display only the 'step' number of elements
     return (
         <>
-        <div className='proofVerVerdict'>{verdict}</div>
         <div className='proofverResult'>
-             {proof.subarray(0, step)}
-             {verdictSeq.subarray(0, step)}
+             {proof.slice(0, step)}
         </div>
-        <button onClick={increaseStep} disabled={step >= maxStage}> Next Step</button>
+        <button onClick={ increaseStep } disabled={step >= maxStage}> Next Step</button>
+        <button onClick={() => {setStep(1);}}>Restart</button>
     </>
     )
 };
