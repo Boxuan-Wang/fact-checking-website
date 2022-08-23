@@ -21,3 +21,12 @@ a.short_human_result {
     font-size: 35px;
     font-weight: bold;
 }
+
+.historyClaimText {
+    font-size: 20px;
+    color: black;
+}
+.historyClaimDate {
+    font-size: 10px;
+    color: grey;
+}

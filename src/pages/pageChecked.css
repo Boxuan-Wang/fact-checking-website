@@ -1,0 +1,18 @@
+li.historyEntry {
+    margin-left: 2%;
+    width: 50%;
+    height: auto;
+    border: 2px 0px;
+}
+li.historyEntry:hover {
+    background-color: azure;
+}
+
+ul.historyList {
+    list-style-type: none;
+    height: 100%;
+    width: 100%;
+    display: block;;
+    overflow-y: scroll;
+    
+}

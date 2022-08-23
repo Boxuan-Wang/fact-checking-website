@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavBar } from "../elements/navBar";
 import { getHistory } from "../elements/apiCalls";
 import { ResultPresent } from "../elements/resultPresent";
-
+import "./pageChecked.css"
 
 /**
  * Popular checked result page.
@@ -39,11 +39,11 @@ export const PageChecked =  (props) => {
         onPageChange={props.onPageChange}
         onLogInChange={props.onLogInChange} />
         <div>
-            <ul>
+            <ul className="historyList">
                 {historyClaims.length ===0 ? 
                 <div>No history</div>:
                 historyClaims.map((result) =>
-                <li key={result.date}>
+                <li key={result.date} className='historyEntry'>
                     <ResultPresent format="history" 
                     result={result} 
                     userName={props.logInStats.userName} 
