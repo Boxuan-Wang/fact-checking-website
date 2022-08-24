@@ -2,19 +2,23 @@
     font-size: 40px;
     font-style: bold;
     text-align: center;
-    width: 65%;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    margin-left: 5%;
 }
 
 div.proofver_result {
-    float: left;
-    display: inline;
-    width: 40%;
-    margin: 15px 5% 0px 5%;
+    display: block;
+    width: 100%;
+    margin: 15px 5% 15px 5%;
+    height: 200px;
 }
 .human_result_list {
-    margin: 15px 5% 0px 5%;
-    width: 40%;
-    float: left;
+    margin: 25px 15% 20px 15%;
+    border-top: 25px black;
+    position: relative;
+    width: 70%;
+    height: 35%;
 }
 
 li.human_result {
@@ -37,4 +41,9 @@ ul.humanCheckList {
 .noHumanResultText {
     font-size: 45px;
     font-weight: bolder;
+}
+
+h2 {
+    border-top: 15px black;
+    text-align: center;
 }
