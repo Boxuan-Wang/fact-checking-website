@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavBar } from "../elements/navBar";
 import { getHistory } from "../elements/apiCalls";
 import { ResultPresent } from "../elements/resultPresent";
+import { searchResult } from "./pageNewClaim";
 import "./pageChecked.css"
 
 /**
@@ -12,6 +13,15 @@ import "./pageChecked.css"
 export const PageChecked =  (props) => {
     
     const [historyClaims, setHistoryClaims] = useState(null);
+    const [waiting, setWaiting] = useState(false);
+
+    const checkAgain = async (claim, userName) => {
+        setWaiting(true);
+        const result = await searchResult(claim, userName);
+        setWaiting(false);
+        props.onResultChange(result);
+        props.onPageChange("result");
+      };
 
     useEffect(() => {
         async function fetch() {
@@ -27,7 +37,7 @@ export const PageChecked =  (props) => {
                 
     },[]);
 
-    if(!historyClaims) {
+    if(!historyClaims || waiting) {
         console.log("waiting\n");
         return "loading...";
     }
@@ -43,12 +53,10 @@ export const PageChecked =  (props) => {
                 {historyClaims.length ===0 ? 
                 <div>No history</div>:
                 historyClaims.map((result) =>
-                <li key={result.date} className='historyEntry'>
+                <li key={result.date} className='historyEntry' onClick={() => checkAgain(result.claim, props.logInStats.userName)}>
                     <ResultPresent format="history" 
                     result={result} 
-                    userName={props.logInStats.userName} 
-                    onResultChange={props.onResultChange} 
-                    onPageChange={props.onPageChange}/>
+                    />
                 </li>)
                 }
             </ul>

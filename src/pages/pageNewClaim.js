@@ -32,6 +32,8 @@ export const PageNewClaim = (props) => {
     const [inputClaim,setInputClaim] = useState("");
     const [popOpen, setPopOpen] = useState(false);
     const [popString, setPopString] = useState("");
+    const [waiting, setWaiting] = useState(false);
+    
     const closePop = 
         () => {
             setPopOpen(false);
@@ -43,7 +45,9 @@ export const PageNewClaim = (props) => {
         e.preventDefault();
 
         if(props.logInStats.log) {
-           const checkResult = await searchResult(inputClaim, props.logInStats.userName);
+            setWaiting(true);
+            const checkResult = await searchResult(inputClaim, props.logInStats.userName);
+            setWaiting(false);
             props.onResultChange(checkResult);
         }
         else {
@@ -54,7 +58,11 @@ export const PageNewClaim = (props) => {
         
     }
 
-    return (
+    if(waiting) {
+        return (<div>Loading ... </div>);
+    }
+    else {
+        return (
         <><NavBar 
         logInStats={props.logInStats}
         onPageChange={props.onPageChange}
@@ -67,7 +75,7 @@ export const PageNewClaim = (props) => {
         <div className="newClaim-box">
             <form className="newClaimForm" onSubmit={handleSubmit}>
                 <textarea 
-                    value={inputClaim} 
+                    value={inputClaim}
                     onChange = {e => setInputClaim(e.target.value)}
                     className="new-claim-text"/> 
                 <input className="submit-button" type="submit" value="Make the Claim!"/>
@@ -75,4 +83,6 @@ export const PageNewClaim = (props) => {
         </div>
         </>
     );
+    }
+    
 };

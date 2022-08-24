@@ -1,6 +1,5 @@
 import React from 'react';
 import "./resultPresent.css";
-import { searchResult } from "../pages/pageNewClaim";
 import { RenderProofString } from "./proofverRender";
 
 export const ResultPresent = (props) => {
@@ -14,14 +13,10 @@ export const ResultPresent = (props) => {
     }
     else if(props.format === 'history') {
       const date = new Date(props.result.date);
-      const checkAgain = async () => {
-        const result = await searchResult(props.result.claim, props.userName);
-        props.onResultChange(result);
-        props.onPageChange("result");
-      };
+      
       ret = 
       <>
-      <div onClick={checkAgain}>
+      <div>
         <div className='historyClaimText'>{props.result.claim}</div>
         <div className='historyClaimDate'>{date.toUTCString()}</div>
       </div>

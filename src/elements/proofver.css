@@ -12,3 +12,11 @@ div.proofverCol {
     margin: 0px 20px;
     border: 25px darkmagenta;
 }
+div.proofverPlayButtonsRow {
+    
+    display: block;
+}
+
+button.proofverButton {
+    margin-left: 5%;
+}

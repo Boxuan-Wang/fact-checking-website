@@ -50,7 +50,7 @@ const renderSingleLogic = (claimWord, evidenceWord, operator,verdict) => {
             <div> {claimWord}</div>
             <div> {operator} </div>
             <div> {evidenceWord}</div>
-            <div>{verdict}</div>
+            <div> {verdict} </div>
         </div>
     );
 };
@@ -157,13 +157,14 @@ export const RenderProofString = (props) => {
     //display only the 'step' number of elements
     return (
         <>
-        {/* <div>{play ? "t" : "f"}</div>
-        <div>{step}</div> */}
         <div className='proofverResult'>
              {proof.slice(0, step)}
         </div>
-        <button onClick={ play ? pauseTimer : startTimer }>{play? "Pause": "Play"}</button>
-        <button onClick={() => {setStep(1);}}>Rewind</button>
+        <div className='proofverPlayButtonsRow'>
+            <button className='proofverButton' onClick={ play ? pauseTimer : startTimer }>{play? "Pause": "Play"}</button>
+            <button className='proofverButton' onClick={() => {setStep(1);}}>Rewind</button>
+        </div>
+        
     </>
     )
 };
