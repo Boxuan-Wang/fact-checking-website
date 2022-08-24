@@ -26,7 +26,7 @@ export const PageChecked =  (props) => {
     useEffect(() => {
         async function fetch() {
             const res = await getHistory(props.logInStats.userName);
-            setHistoryClaims(res);
+            setHistoryClaims(res.reverse());
         }
         if(props.logInStats.log) {
             fetch();
@@ -53,7 +53,7 @@ export const PageChecked =  (props) => {
                 {historyClaims.length ===0 ? 
                 <div>No history</div>:
                 historyClaims.map((result) =>
-                <li key={result.date} className='historyEntry' onClick={() => checkAgain(result.claim, props.logInStats.userName)}>
+                <li key={-result.date} className='historyEntry' onClick={() => checkAgain(result.claim, props.logInStats.userName)}>
                     <ResultPresent format="history" 
                     result={result} 
                     />
