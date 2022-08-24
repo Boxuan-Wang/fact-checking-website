@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./proofver.css";
 
 /**
@@ -126,23 +126,44 @@ const renderFromProofElements = (claim, evidence, operator) => {
 export const RenderProofString = (props) => {
     //used for displaying part of proof, for animation
     const [step, setStep] = useState(1);
+    const [play, setPlay] = useState(false);
 
+    console.log(play);
     const elements = extract(props.proof);
-    const verdict = props.verdict;
-    const verdictSeq = produceVerdictSeq(elements.operators);
+    // const verdict = props.verdict;
+    // const verdictSeq = produceVerdictSeq(elements.operators);
     const proof = renderFromProofElements(elements.claim, elements.evidence, elements.operators);
     const maxStage = proof.length;
-    const increaseStep = () => {setStep(step>=maxStage ? step: step + 1)};
+    const pauseTimer = () => {setPlay(false)};
+    const startTimer = () => {setPlay(true)};
 
+    
+
+    useEffect(() => {
+        if(play) {
+            if(step >= maxStage) {
+                setPlay(false);
+            }
+            else {
+                setTimeout(() =>  {                
+                    setStep( step + 1);
+                    startTimer();
+                },
+                500);
+            }
+        }
+    });
 
     //display only the 'step' number of elements
     return (
         <>
+        {/* <div>{play ? "t" : "f"}</div>
+        <div>{step}</div> */}
         <div className='proofverResult'>
              {proof.slice(0, step)}
         </div>
-        <button onClick={ increaseStep } disabled={step >= maxStage}> Next Step</button>
-        <button onClick={() => {setStep(1);}}>Restart</button>
+        <button onClick={ play ? pauseTimer : startTimer }>{play? "Pause": "Play"}</button>
+        <button onClick={() => {setStep(1);}}>Rewind</button>
     </>
     )
 };

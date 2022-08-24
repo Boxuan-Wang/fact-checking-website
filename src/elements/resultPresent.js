@@ -21,10 +21,10 @@ export const ResultPresent = (props) => {
       };
       ret = 
       <>
-      <a onClick={checkAgain}>
+      <div onClick={checkAgain}>
         <div className='historyClaimText'>{props.result.claim}</div>
         <div className='historyClaimDate'>{date.toUTCString()}</div>
-      </a>
+      </div>
       </>
     }
     else if (props.format === 'short_human_result') {
