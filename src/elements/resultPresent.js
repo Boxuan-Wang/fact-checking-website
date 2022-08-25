@@ -53,9 +53,7 @@ export const ResultPresent = (props) => {
       if(props.result) {
         ret = 
         <>
-          <div className='proofver_result'>
-            <RenderProofString proof={props.result}/>
-          </div>
+          <RenderProofString proof={props.result}/>
         </>
       }
       else {

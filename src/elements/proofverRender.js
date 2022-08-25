@@ -157,7 +157,9 @@ export const RenderProofString = (props) => {
     //display only the 'step' number of elements
     return (
         <>
-        {proof.slice(0, step)}
+        <div className='proofverText'>
+             {proof.slice(0, step)}
+        </div>
         <div className='proofverPlayButtonsRow'>
             <button className='proofverButton' onClick={ play ? pauseTimer : startTimer }>{play? "Pause": "Play"}</button>
             <button className='proofverButton' onClick={() => {setStep(1);}}>Rewind</button>

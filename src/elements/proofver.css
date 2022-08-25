@@ -1,3 +1,7 @@
+div.proofverText {
+    display: block;
+    height: 140px;
+}
 div.singleLogic {
     float: left;
     display: inline;
@@ -14,10 +18,10 @@ div.proofverCol {
     font-weight: bold;
 }
 div.proofverPlayButtonsRow {
-    
     display: block;
 }
 
 button.proofverButton {
     margin-left: 5%;
+    width: 80px;
 }
