@@ -1,6 +1,6 @@
 import React from 'react';
 import "./resultPresent.css";
-import { searchResult } from "../pages/pageNewClaim";
+import { RenderProofString } from "./proofverRender";
 
 export const ResultPresent = (props) => {
   let ret;
@@ -13,16 +13,13 @@ export const ResultPresent = (props) => {
     }
     else if(props.format === 'history') {
       const date = new Date(props.result.date);
-      const checkAgain = async () => {
-        const result = await searchResult(props.result.claim, props.userName);
-        props.onResultChange(result);
-        props.onPageChange("result");
-      };
+      
       ret = 
       <>
+      <div>
         <div className='historyClaimText'>{props.result.claim}</div>
         <div className='historyClaimDate'>{date.toUTCString()}</div>
-        <button className='historyClaimCheckButton' onClick={checkAgain}>Check again</button>
+      </div>
       </>
     }
     else if (props.format === 'short_human_result') {
@@ -51,6 +48,21 @@ export const ResultPresent = (props) => {
           <div>{props.result.publication}</div>
         </div>
       </>
+    }
+    else if (props.format === "proofver_result"){
+      if(props.result) {
+        ret = 
+        <>
+          <RenderProofString proof={props.result}/>
+        </>
+      }
+      else {
+        ret = <>
+          <div className='noCheckingEngine'>No checking engine connected</div>
+        </>
+      }
+
+      
     }
     else throw new Error('Not a format for result representing.');
 

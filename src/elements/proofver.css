@@ -1,0 +1,27 @@
+div.proofverText {
+    display: block;
+    height: 140px;
+}
+div.singleLogic {
+    float: left;
+    display: inline;
+    text-align: center;
+    margin: 0px 20px ;
+}
+
+div.proofverCol {
+    float: left;
+    display: block;
+    text-align: left;
+    margin: 0px 20px;
+    border: 25px darkmagenta;
+    font-weight: bold;
+}
+div.proofverPlayButtonsRow {
+    display: block;
+}
+
+button.proofverButton {
+    margin-left: 5%;
+    width: 80px;
+}

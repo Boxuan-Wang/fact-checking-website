@@ -1,5 +1,5 @@
 div.newClaim-box {
-    margin: auto auto;
+    margin: 8% auto;
     text-align: center;
 }
 
@@ -27,6 +27,7 @@ textarea.new-claim-text {
     background-color: #889BDE;
     border-radius: 17px;
     border: 0ch;
+    margin-top: 5%;
 }
 
 .submit-button:hover {

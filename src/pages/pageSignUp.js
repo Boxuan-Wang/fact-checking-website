@@ -189,10 +189,10 @@ export const PageSignUp = (props) => {
             </div>
                 
             <div className="form-item">
-                <label htmlFor="verification-id" className="label-signup">Verify Email</label>
+                <label htmlFor="verification-id" className="label-signup">Verification Code</label>
                 <input 
                 type="txt" 
-                name="Verify email"
+                name="Verify Code"
                 id="verification-id"
                 className="signup-vericode"
                 value={form.veriCode} 
