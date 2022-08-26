@@ -11,7 +11,7 @@ export const PageResult = (props) => {
     console.log('Result');
     const human_result_list_item = props.resultToShow.human_result.map(
         (result) => 
-        <li className="human_result" key={result.claim_url}>
+        <li className="human_result" key={result.claim_url + result.claim_org}>
             <ResultPresent format="short_human_result" result={result}/>
         </li>
     );
@@ -29,7 +29,7 @@ export const PageResult = (props) => {
         <hr/>
         <h2>Proofver Result</h2>
         <div className="proofver_result">
-            <ResultPresent format="proofver_result" result = {props.resultToShow.fever_result.proof}/>
+            <ResultPresent format="proofver_result" result = {props.resultToShow.fever_result}/>
         </div>
         <hr/>
         <h2>Human Results</h2>

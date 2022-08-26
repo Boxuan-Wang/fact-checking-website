@@ -1,6 +1,6 @@
 import {act} from 'react-dom/test-utils';
 import React from 'react';
-import { extract,produceVerdictSeq,RenderProofString } from "../elements/proofverRender";
+import { extract,extractEvidence,produceVerdictSeq,RenderProofString } from "../elements/proofverRender";
 
 test('test ProofVer normal', () => {
     let res;
@@ -35,4 +35,3 @@ test('test proofver extract with evidence only', () => {
 //     act(() => res = renderProofString(input));
 //     expect(res).toBe(<div className="proofverResult"><div className="singleLogic"><div> claim</div><div> evidence</div><div> = </div></div></div>);
 // });
-

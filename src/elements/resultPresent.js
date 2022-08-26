@@ -50,10 +50,10 @@ export const ResultPresent = (props) => {
       </>
     }
     else if (props.format === "proofver_result"){
-      if(props.result) {
+      if(props.result.output && props.result.evidence) {
         ret = 
         <>
-          <RenderProofString proof={props.result}/>
+          <RenderProofString result={props.result}/>
         </>
       }
       else {

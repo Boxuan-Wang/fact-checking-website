@@ -25,3 +25,7 @@ button.proofverButton {
     margin-left: 5%;
     width: 80px;
 }
+div.proofverEvidence {
+    width:75%;
+    margin: 5px;
+}

@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import "./proofver.css";
 
+const extractEvidence = (evidenceText) => {
+    console.log(evidenceText)
+    //spliting the evidence string into array
+    let ret = [];
+    const len = evidenceText.documents.length;
+    for (let i = 0; i < len; i++){
+        ret.push(evidenceText.documents[i] + ": " + evidenceText.sentences[i]);
+    }
+    return ret;
+};
+
 /**
  * Extract claim words, evidence words and natural logic operators
  */
@@ -44,9 +55,9 @@ export const extract = (resultText) => {
     };
 }
 
-const renderSingleLogic = (claimWord, evidenceWord, operator,verdict) => {
+const renderSingleLogic = (claimWord, evidenceWord, operator,verdict,i) => {
     return (
-        <div className='singleLogic'>
+        <div className='singleLogic' key={i}>
             <div> {claimWord}</div>
             <div> {operator} </div>
             <div> {evidenceWord}</div>
@@ -105,7 +116,7 @@ const renderFromProofElements = (claim, evidence, operator) => {
 
     let ret = [];
     ret.push(
-        <div className='proofverCol'> 
+        <div className='proofverCol' key={-1}> 
             <div>Claim</div>
             <div>Relation</div>
             <div>Evidence</div>
@@ -115,7 +126,7 @@ const renderFromProofElements = (claim, evidence, operator) => {
     const len = claim.length;
     const verdictSeq = produceVerdictSeq(operator);
     for(let i = 0; i < len; i++) {
-        ret.push(renderSingleLogic(claim[i],evidence[i],operator[i],detailVerdict(verdictSeq[i])));
+        ret.push(renderSingleLogic(claim[i],evidence[i],operator[i],detailVerdict(verdictSeq[i]),i));
     }
 
     return ret;
@@ -128,8 +139,8 @@ export const RenderProofString = (props) => {
     const [step, setStep] = useState(1);
     const [play, setPlay] = useState(false);
 
-    console.log(play);
-    const elements = extract(props.proof);
+    const elements = extract(props.result.output.proof);
+    const evidence = extractEvidence(props.result.evidence);
     // const verdict = props.verdict;
     // const verdictSeq = produceVerdictSeq(elements.operators);
     const proof = renderFromProofElements(elements.claim, elements.evidence, elements.operators);
@@ -146,7 +157,7 @@ export const RenderProofString = (props) => {
             }
             else {
                 setTimeout(() =>  {                
-                    setStep( step + 1);
+                    setStep(step + 1);
                     startTimer();
                 },
                 500);
@@ -164,7 +175,12 @@ export const RenderProofString = (props) => {
             <button className='proofverButton' onClick={ play ? pauseTimer : startTimer }>{play? "Pause": "Play"}</button>
             <button className='proofverButton' onClick={() => {setStep(1);}}>Rewind</button>
         </div>
-        
+        <h2>Evidence from WIKI</h2>
+        {evidence.map(e => {
+            return <div className='proofverEvidence' key={e}>
+            {e}
+        </div>
+        })}
     </>
-    )
+    );
 };
